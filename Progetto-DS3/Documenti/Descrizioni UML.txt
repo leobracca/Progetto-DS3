@@ -4,3 +4,11 @@ Personaggio: personaggio che deve giocare la partita
 Inventario: oggetti che il personaggio contiene
 File: file contente tutti i personaggi, oggetti dell'invenario che abbiamo nel gioco
 Input: classe per poter gestire gli input dell'utente, con metodi statici
+
+Metodi Gestore
+init() = primo metodo da chiamare per poter impostare il gioco
+addPersonaggio() = metodo per poter aggiungere un personaggio
+gioca() = metodo per poter iniziare a giocare
+checkSconfitto() = metodo per controllare se il personaggio è morto
+statistiche() = metodo per vedere le statistiche del personaggio
+input() = metodo per poter ricevere input
