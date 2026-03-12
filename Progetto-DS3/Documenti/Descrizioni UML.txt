@@ -12,3 +12,16 @@ gioca() = metodo per poter iniziare a giocare
 checkSconfitto() = metodo per controllare se il personaggio è morto
 statistiche() = metodo per vedere le statistiche del personaggio
 input() = metodo per poter ricevere input
+
+Metodi Personaggio
+addOggetto() = aggiungere oggetti all'inventario del giocatore
+remOggetto() = rimuovere oggetti all'inventario del giocatore
+usaOggetto() = usare oggetti per modificare lo stato del giocatore
+
+Metodi File
+leggiPersonaggi() = leggere il file personaggi
+leggiInventario() = leggere il file inventario
+
+MetodiInput
+faiScelta() = fare un input dall'utente
+generaNumero() = genera un numero random
