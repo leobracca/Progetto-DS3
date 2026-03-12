@@ -3,7 +3,7 @@ Gestore: il capo della partita
 Personaggio: personaggio che deve giocare la partita
 Inventario: oggetti che il personaggio contiene
 File: file contente tutti i personaggi, oggetti dell'invenario che abbiamo nel gioco
-Input: classe per poter gestire gli input dell'utente, con metodi statici
+Input: classe per poter gestire gli input dell'utente
 
 Metodi Gestore
 init() = primo metodo da chiamare per poter impostare il gioco
@@ -22,6 +22,10 @@ Metodi File
 leggiPersonaggi() = leggere il file personaggi
 leggiInventario() = leggere il file inventario
 
-MetodiInput
+Metodi Input
 faiScelta() = fare un input dall'utente
 generaNumero() = genera un numero random
+
+Metodi Inventario
+get() = per ritornare valori
+set() = per settare valori
