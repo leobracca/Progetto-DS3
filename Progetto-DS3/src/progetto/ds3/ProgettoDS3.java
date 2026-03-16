@@ -16,6 +16,6 @@ public class ProgettoDS3 {
     public static void main(String[] args) {
         Gestore g = new Gestore();
         g.init();
-    }
+    } 
     
 }
