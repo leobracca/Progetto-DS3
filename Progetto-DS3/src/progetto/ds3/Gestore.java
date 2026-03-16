@@ -9,11 +9,36 @@ import java.util.*;
  * @author braccalenti.leonardo
  */
 public class Gestore {
-    private int round;
+    private int round = 0;
     private ArrayList<Personaggio>personaggi = new ArrayList<>();
+    FileManager fm = new FileManager();
+    InputManager im = new InputManager();
     
     
     void init(){
+        addPersonaggio();
+        stampa();
+    }
+    
+    void addPersonaggio(){
+        fm.leggiPersonaggi(personaggi);
+        String nPersonaggio = im.sceltaPersonaggio();
         
+        for(int i = 0; i < personaggi.size(); i++){
+            if(!nPersonaggio.equals(personaggi.get(i).getNome())){
+                personaggi.remove(i);
+                System.out.println("Personaggio rimosso");
+            }
+            
+            else{
+                System.out.println("Personaggio aggiunto");
+            }
+        }
+    }
+    
+    void stampa(){
+        for(Personaggio p: personaggi){
+            System.out.println("Nome: " + p.getNome());
+        }
     }
 }

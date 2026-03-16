@@ -16,4 +16,17 @@ public class Personaggio {
     private int danni;
     private boolean abilita;
     private ArrayList<Inventario>inventario = new ArrayList<>();
+
+    public Personaggio(String nome, String vita, String fame, String danni) {
+        this.nome = nome;
+        this.vita = Integer.parseInt(vita);
+        this.fame = Integer.parseInt(fame);
+        this.danni = Integer.parseInt(danni);
+    }
+    
+    
+    
+    String getNome(){
+        return nome;
+    }
 }
