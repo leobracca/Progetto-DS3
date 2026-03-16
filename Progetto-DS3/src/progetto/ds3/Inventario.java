@@ -9,5 +9,8 @@ package progetto.ds3;
  * @author braccalenti.leonardo
  */
 public class Inventario {
-    
+    private String nome;
+    private int quantita;
+    private int fame;
+    private int vita;
 }
