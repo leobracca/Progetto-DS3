@@ -27,11 +27,7 @@ public class Gestore {
         for(int i = 0; i < personaggi.size(); i++){
             if(!nPersonaggio.equals(personaggi.get(i).getNome())){
                 personaggi.remove(i);
-                System.out.println("Personaggio rimosso");
-            }
-            
-            else{
-                System.out.println("Personaggio aggiunto");
+                i--;
             }
         }
     }
