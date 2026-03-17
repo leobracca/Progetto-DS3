@@ -18,6 +18,7 @@ public class Gestore {
     void init(){
         addPersonaggio();
         stampa();
+        iniziaGioco();
     }
     
     void addPersonaggio(){
@@ -29,6 +30,15 @@ public class Gestore {
                 personaggi.remove(i);
                 i--;
             }
+        }
+    }
+    
+    void iniziaGioco(){
+        for(int i = 0; i < 10; i++){
+            round++;
+            System.out.println("Round: " + round);
+            stampa();
+            im.prossimo();
         }
     }
     

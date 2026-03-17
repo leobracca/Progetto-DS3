@@ -18,4 +18,8 @@ public class InputManager {
         
         return nPersonaggio;
     }
+    
+    void prossimo(){
+        s.nextLine();
+    }
 }
