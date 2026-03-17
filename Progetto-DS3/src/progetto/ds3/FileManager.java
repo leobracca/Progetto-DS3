@@ -10,7 +10,7 @@ import java.util.*;
  * @author braccalenti.leonardo
  */
 public class FileManager {
-    private String filePersonaggi = "Personaggi.csv";
+    private String filePersonaggi = "Documenti\\File\\Personaggi.csv";
     private String fileInventario;    
     
     ArrayList leggiPersonaggi(ArrayList<Personaggio>personaggi){
