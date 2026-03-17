@@ -34,7 +34,7 @@ public class Gestore {
     
     void stampa(){
         for(Personaggio p: personaggi){
-            System.out.println("Nome: " + p.getNome());
+            System.out.println("Nome: " + p.getNome() + " vita: " + p.getVita() + " danni: " + p.getDanni()+ " fame: " + p.getFame());
         }
     }
 }

@@ -29,4 +29,18 @@ public class Personaggio {
     String getNome(){
         return nome;
     }
+    
+    Integer getVita(){
+        return vita;
+    }
+
+    int getFame() {
+        return fame;
+    }
+
+    int getDanni() {
+        return danni;
+    }
+    
+    
 }
