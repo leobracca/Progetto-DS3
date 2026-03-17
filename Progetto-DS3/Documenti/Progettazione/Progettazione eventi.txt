@@ -1,0 +1,21 @@
+Creazione due classe per eventi con boss oppure oggetti
+
+Boss:
+	nome, vita, danni
+
+Oggetto:
+	nome, vita, salute, danni, fame
+
+Aggiungere metodi per poter aggiungere, rimuovere o usare oggetti al personaggio
+Aggiungere metodi per poter combattere un boss
+Aggiungere metodo nel gestore per poter generare un evento con un numero random
+In base al numero fa partire un evento di una categoria
+
+Struttura metodi:
+	Gestore:
+		genera evento(){
+			//numero casuale se va da 0 a 50 genera il boss
+			
+			//numero casuale se va da 51 a 100 genera l'oggetto
+			
+		}
