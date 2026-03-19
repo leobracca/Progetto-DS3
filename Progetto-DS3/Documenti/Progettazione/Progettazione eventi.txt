@@ -1,5 +1,5 @@
 Creazione due classe per eventi con boss oppure oggetti
-
+Creazione classe combattimento
 Boss:
 	nome, vita, danni
 
@@ -10,12 +10,30 @@ Aggiungere metodi per poter aggiungere, rimuovere o usare oggetti al personaggio
 Aggiungere metodi per poter combattere un boss
 Aggiungere metodo nel gestore per poter generare un evento con un numero random
 In base al numero fa partire un evento di una categoria
-
 Struttura metodi:
 	Gestore:
+		Combattimento c = new Combattimento();
+		
 		genera evento(){
 			//numero casuale se va da 0 a 50 genera il boss
-			
+			scegliBoss();
+			c.combattimento(Personaggio, Boss);
+			boss.remove(b);
 			//numero casuale se va da 51 a 100 genera l'oggetto
-			
+			o.usa(Oggetto da usare);
+			oggetto.remove(o);
+		}
+
+	Combattimento:
+		combattimento(){
+			for(int i = 0; i < Combattimento.size(); i++){
+				//quando uno dei due non ha piu vita vengono eliminati
+				checkVincitore(combattente);
+			}	
+		}
+
+		checkVincitore(combattente){
+			if(combattente.getVita <= 0){
+				Combattimento.remove(Combattente);
+			}
 		}
