@@ -10,7 +10,10 @@ import java.util.*;
  */
 public class InputManager {
     private String scelta;
+    private int n;
+    
     Scanner s = new Scanner(System.in);
+    Random r = new Random();
     
     String sceltaPersonaggio(){
         System.out.println("Quale personaggio scegli?");
@@ -21,5 +24,10 @@ public class InputManager {
     
     void prossimo(){
         s.nextLine();
+    }
+    
+    Integer generaNumero(int max){
+        n = r.nextInt(0,max);
+        return n;
     }
 }

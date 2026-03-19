@@ -16,6 +16,7 @@ public class Gestore {
     
     FileManager fm = new FileManager();
     InputManager im = new InputManager();
+    Combattimento c = new Combattimento();
     
     
     void init(){
@@ -43,11 +44,16 @@ public class Gestore {
     
     void iniziaGioco(){
         for(int i = 0; i < 10; i++){
+            generaEvento();
             round++;
             System.out.println("Round: " + round);
             stampa();
             im.prossimo();
         }
+    }
+    
+    void generaEvento(){
+        int n = im.generaNumero(boss.size()-1);
     }
     
     void stampa(){
