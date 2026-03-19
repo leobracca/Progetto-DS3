@@ -11,18 +11,26 @@ import java.util.*;
 public class Gestore {
     private int round = 0;
     private ArrayList<Personaggio>personaggi = new ArrayList<>();
+    private ArrayList<Boss>boss = new ArrayList<>();
+    
+    
     FileManager fm = new FileManager();
     InputManager im = new InputManager();
     
     
     void init(){
+        leggiFile();
         addPersonaggio();
         stampa();
         iniziaGioco();
     }
     
-    void addPersonaggio(){
+    void leggiFile(){
         fm.leggiPersonaggi(personaggi);
+        fm.leggiBoss(boss);
+    }
+    
+    void addPersonaggio(){
         String nPersonaggio = im.sceltaPersonaggio();
         
         for(int i = 0; i < personaggi.size(); i++){

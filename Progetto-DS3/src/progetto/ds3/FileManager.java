@@ -11,6 +11,7 @@ import java.util.*;
  */
 public class FileManager {
     private String filePersonaggi = "Documenti\\File\\Personaggi.csv";
+    private String fileBoss = "Documenti\\File\\Boss.csv";
     private String fileInventario;    
     
     ArrayList leggiPersonaggi(ArrayList<Personaggio>personaggi){
@@ -29,5 +30,23 @@ public class FileManager {
         }  
         
         return personaggi;
+    }
+    
+    ArrayList leggiBoss(ArrayList<Boss>boss){
+        try(BufferedReader read = new BufferedReader(new FileReader(fileBoss))){
+            read.readLine();
+            String line;
+            while((line = read.readLine()) != null){
+                String[]colonna = line.split(",");
+                Boss b = new Boss(colonna[0], colonna[1], colonna[2]);
+                boss.add(b);
+            }
+        }
+        
+        catch(IOException e){
+            System.out.println("Impossibile leggere i boss");
+        }
+        
+        return boss;
     }
 }
