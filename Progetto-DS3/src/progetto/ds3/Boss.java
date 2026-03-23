@@ -19,4 +19,16 @@ public class Boss {
         this.danni = Integer.parseInt(danni);
     }
     
+        String getNome(){
+        return nome;
+    }
+    
+    Integer getVita(){
+        return vita;
+    }
+
+    int getDanni() {
+        return danni;
+    }
+    
 }

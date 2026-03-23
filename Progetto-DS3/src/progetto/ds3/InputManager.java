@@ -26,8 +26,8 @@ public class InputManager {
         s.nextLine();
     }
     
-    Integer generaNumero(int max){
-        n = r.nextInt(0,max);
+    Integer generaNumero(int min, int max){
+        n = r.nextInt(min, max);
         return n;
     }
 }

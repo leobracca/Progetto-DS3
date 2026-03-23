@@ -12,11 +12,10 @@ public class Gestore {
     private int round = 0;
     private ArrayList<Personaggio>personaggi = new ArrayList<>();
     private ArrayList<Boss>boss = new ArrayList<>();
-    
+    private ArrayList<Combattimento>combattenti = new ArrayList<>();
     
     FileManager fm = new FileManager();
     InputManager im = new InputManager();
-    Combattimento c = new Combattimento();
     
     
     void init(){
@@ -53,7 +52,27 @@ public class Gestore {
     }
     
     void generaEvento(){
-        int n = im.generaNumero(boss.size()-1);
+        int n = im.generaNumero(0, 101);
+        if(n <= 50){
+            n = im.generaNumero(0, boss.size());
+            addCombattenti(n);
+        }
+        
+        else{
+            
+        }
+    }
+    
+    void addCombattenti(int n){
+        Combattimento c1 = new Combattimento(personaggi.get(0));
+        combattenti.add(c1);
+        int i = 0;
+        for(Boss b: boss){
+            if(i == n){
+                Combattimento c2 = new Combattimento(boss.get(n));
+                combattenti.add(c2);
+            }
+        }
     }
     
     void stampa(){
