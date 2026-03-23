@@ -12,7 +12,7 @@ import java.util.*;
 public class FileManager {
     private String filePersonaggi = "Documenti\\File\\Personaggi.csv";
     private String fileBoss = "Documenti\\File\\Boss.csv";
-    private String fileInventario;    
+    private String fileOggetti = "Documenti\\File\\Oggetti.csv";    
     
     ArrayList leggiPersonaggi(ArrayList<Personaggio>personaggi){
         try(BufferedReader read = new BufferedReader(new FileReader(filePersonaggi))){
@@ -49,4 +49,8 @@ public class FileManager {
         
         return boss;
     }
+    /**
+    ArrayList leggiOggetti(ArrayList<Oggetto>){
+        
+    }*/
 }

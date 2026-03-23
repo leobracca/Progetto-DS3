@@ -56,6 +56,7 @@ public class Gestore {
         if(n <= 50){
             n = im.generaNumero(0, boss.size());
             addCombattenti(n);
+            combatti();
         }
         
         else{
@@ -75,9 +76,15 @@ public class Gestore {
         }
     }
     
+    void combatti(){
+        for(Combattimento c: combattenti){
+            
+        }
+    }
+    
     void stampa(){
         for(Personaggio p: personaggi){
-            System.out.println("Nome: " + p.getNome() + " vita: " + p.getVita() + " danni: " + p.getDanni()+ " fame: " + p.getFame());
+            System.out.println("Nome: " + p.getNome() + " vita: " + p.getVita() + " danni: " + p.getDanni()+ " energia: " + p.getEnergia());
         }
     }
 }

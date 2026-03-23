@@ -12,15 +12,15 @@ public class Personaggio {
     private String nome;
     private int punteggio;
     private int vita;
-    private int fame;
+    private int energia;
     private int danni;
     private boolean abilita;
     private ArrayList<Inventario>inventario = new ArrayList<>();
 
-    public Personaggio(String nome, String vita, String fame, String danni) {
+    public Personaggio(String nome, String vita, String energia, String danni) {
         this.nome = nome;
         this.vita = Integer.parseInt(vita);
-        this.fame = Integer.parseInt(fame);
+        this.energia = Integer.parseInt(energia);
         this.danni = Integer.parseInt(danni);
     }
     
@@ -34,8 +34,8 @@ public class Personaggio {
         return vita;
     }
 
-    int getFame() {
-        return fame;
+    int getEnergia() {
+        return energia;
     }
 
     int getDanni() {
