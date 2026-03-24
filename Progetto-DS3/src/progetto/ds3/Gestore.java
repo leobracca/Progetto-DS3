@@ -12,6 +12,7 @@ public class Gestore {
     private int round = 0;
     private ArrayList<Personaggio>personaggi = new ArrayList<>();
     private ArrayList<Boss>boss = new ArrayList<>();
+    private ArrayList<Oggetto>oggetti = new ArrayList<>();
     private ArrayList<Combattimento>combattenti = new ArrayList<>();
     
     FileManager fm = new FileManager();
@@ -28,6 +29,7 @@ public class Gestore {
     void leggiFile(){
         fm.leggiPersonaggi(personaggi);
         fm.leggiBoss(boss);
+        fm.leggiOggetti(oggetti);
     }
     
     void addPersonaggio(){

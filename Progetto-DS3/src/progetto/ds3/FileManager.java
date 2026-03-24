@@ -49,8 +49,21 @@ public class FileManager {
         
         return boss;
     }
-    /**
-    ArrayList leggiOggetti(ArrayList<Oggetto>){
+    
+    ArrayList leggiOggetti(ArrayList<Oggetto>oggetti){
+        try(BufferedReader read = new BufferedReader(new FileReader(fileOggetti))){
+            read.readLine();
+            String line;
+            while((line = read.readLine()) != null){
+                String[]colonna = line.split(",");
+                Oggetto o = new Oggetto(colonna[0],colonna[1],colonna[2],colonna[3]);
+                oggetti.add(o);
+            }
+        }
         
-    }*/
+        catch(IOException e){
+            System.out.println("Impossibile leggere gli oggetti");
+        }
+        return oggetti;
+    }
 }
