@@ -14,6 +14,7 @@ public class Gestore {
     private ArrayList<Boss>boss = new ArrayList<>();
     private ArrayList<Oggetto>oggetti = new ArrayList<>();
     private ArrayList<Combattimento>combattenti = new ArrayList<>();
+    private ArrayList<Inventario>inventario = new ArrayList<>();
     
     FileManager fm = new FileManager();
     InputManager im = new InputManager();
@@ -62,7 +63,22 @@ public class Gestore {
         }
         
         else{
+            boolean check = false;
+            n = im.generaNumero(0, oggetti.size());
+            String nome = oggetti.get(n).getNome();
+            for(int i = 0; i < oggetti.size(); i++){
+                for(int j = 0; j < inventario.size(); j++){
+                    if(oggetti.get(i).getNome == inventario.get(j).getNome()){
+                        inventario.get(j).setQuantita();
+                        check = true;
+                    }
+                }
+            }
             
+            if(check == false){
+                Inventario i = new Inventario();
+                inventario.add(i);
+            }
         }
     }
     
