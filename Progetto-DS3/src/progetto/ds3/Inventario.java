@@ -13,4 +13,16 @@ public class Inventario {
     private int quantita;
     private int fame;
     private int vita;
+    
+    String getNome(){
+        return nome;
+    }
+    
+    int getQuantita(){
+        return quantita;
+    }
+    
+    void setQuantita(){
+        quantita++;
+    }
 }

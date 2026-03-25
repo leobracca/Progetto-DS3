@@ -10,6 +10,7 @@ import java.util.*;
  */
 public class Gestore {
     private int round = 0;
+    private int n;
     private ArrayList<Personaggio>personaggi = new ArrayList<>();
     private ArrayList<Boss>boss = new ArrayList<>();
     private ArrayList<Oggetto>oggetti = new ArrayList<>();
@@ -55,7 +56,7 @@ public class Gestore {
     }
     
     void generaEvento(){
-        int n = im.generaNumero(0, 101);
+        n = im.generaNumero(0, 101);
         if(n <= 50){
             n = im.generaNumero(0, boss.size());
             addCombattenti(n);
@@ -63,22 +64,7 @@ public class Gestore {
         }
         
         else{
-            boolean check = false;
-            n = im.generaNumero(0, oggetti.size());
-            String nome = oggetti.get(n).getNome();
-            for(int i = 0; i < oggetti.size(); i++){
-                for(int j = 0; j < inventario.size(); j++){
-                    if(oggetti.get(i).getNome == inventario.get(j).getNome()){
-                        inventario.get(j).setQuantita();
-                        check = true;
-                    }
-                }
-            }
-            
-            if(check == false){
-                Inventario i = new Inventario();
-                inventario.add(i);
-            }
+            gestioneOggetti();
         }
     }
     
@@ -97,6 +83,45 @@ public class Gestore {
     void combatti(){
         for(Combattimento c: combattenti){
             
+        }
+    }
+    
+    void gestioneOggetti(){
+        n = im.generaNumero(0,11);
+        if(n < 6){
+            boolean check = false;
+            n = im.generaNumero(0, oggetti.size());
+            String nome = oggetti.get(n).getNome();
+            for(int i = 0; i < oggetti.size(); i++){
+                for(int j = 0; j < inventario.size(); j++){
+                    if(nome.equals(inventario.get(j).getNome())){
+                        inventario.get(j).setQuantita();
+                        check = true;
+                    }
+                }
+            }
+
+            if(check == false){
+                Inventario i = new Inventario();
+                inventario.add(i);
+                inventario.get(inventario.size()-1).setQuantita();
+            }
+        }
+        
+        else{
+            n = im.generaNumero(0, inventario.size());
+            String nome = inventario.get(n).getNome();
+            for(int i = 0; i < inventario.size(); i++){
+                if(nome.equals(inventario.get(i).getNome())){
+                    if(inventario.get(i).getQuantita() <= 1){
+                        inventario.remove(i);
+                    }
+                    
+                    else{
+                        inventario.get(i).setQuantita();
+                    }
+                }
+            }
         }
     }
     

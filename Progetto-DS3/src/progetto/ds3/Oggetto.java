@@ -20,4 +20,10 @@ class Oggetto {
         this.danni = Integer.parseInt(danni);
         this.energia = Integer.parseInt(energia);
     }
+    
+    String getNome(){
+        return nome;
+    }
+    
+    
 }
