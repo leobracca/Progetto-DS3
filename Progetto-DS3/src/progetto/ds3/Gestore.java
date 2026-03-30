@@ -14,7 +14,6 @@ public class Gestore {
     private ArrayList<Personaggio>personaggi = new ArrayList<>();
     private ArrayList<Boss>boss = new ArrayList<>();
     private ArrayList<Oggetto>oggetti = new ArrayList<>();
-    private ArrayList<Combattimento>combattenti = new ArrayList<>();
     private ArrayList<Inventario>inventario = new ArrayList<>();
     
     FileManager fm = new FileManager();
@@ -59,8 +58,7 @@ public class Gestore {
         n = im.generaNumero(0, 101);
         if(n <= 50){
             n = im.generaNumero(0, boss.size());
-            addCombattenti(n);
-            combatti();
+            combatti(n);
         }
         
         else{
@@ -68,21 +66,24 @@ public class Gestore {
         }
     }
     
-    void addCombattenti(int n){
-        Combattimento c1 = new Combattimento(personaggi.get(0));
-        combattenti.add(c1);
-        int i = 0;
-        for(Boss b: boss){
-            if(i == n){
-                Combattimento c2 = new Combattimento(boss.get(n));
-                combattenti.add(c2);
+    void combatti(int n){
+        boolean combatti = true;
+        while(combatti == true){
+            boss.get(n).setVita(personaggi.get(0).getDanni());
+        
+            if(boss.get(n).getVita() <= 0){
+                boss.remove(n);
+                combatti = false;
             }
-        }
-    }
-    
-    void combatti(){
-        for(Combattimento c: combattenti){
-            
+
+            else{
+                personaggi.get(0).setVita(boss.get(n).getDanni());
+
+                if(personaggi.get(0).getVita() <= 0){
+                    personaggi.remove(0);
+                    combatti = false;
+                }
+            }
         }
     }
     
