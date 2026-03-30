@@ -45,12 +45,12 @@ public class Gestore {
     }
     
     void iniziaGioco(){
-        for(int i = 0; i < 10; i++){
-            generaEvento();
-            round++;
-            System.out.println("Round: " + round);
-            stampa();
-            im.prossimo();
+        for(int i = 0; i < 10 && personaggi.size() >= 1; i++){
+                generaEvento();
+                round++;
+                System.out.println("Round: " + round);
+                stampa();
+                im.prossimo();
         }
     }
     
@@ -74,6 +74,8 @@ public class Gestore {
             if(boss.get(n).getVita() <= 0){
                 boss.remove(n);
                 combatti = false;
+                
+                System.out.println("Hai vinto il combattimento");
             }
 
             else{
@@ -82,6 +84,8 @@ public class Gestore {
                 if(personaggi.get(0).getVita() <= 0){
                     personaggi.remove(0);
                     combatti = false;
+                    
+                    System.out.println("Hai perso il combattimento");
                 }
             }
         }
