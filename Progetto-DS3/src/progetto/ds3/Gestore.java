@@ -46,11 +46,11 @@ public class Gestore {
     
     void iniziaGioco(){
         for(int i = 0; i < 10 && personaggi.size() >= 1; i++){
-                generaEvento();
-                round++;
-                System.out.println("Round: " + round);
-                stampa();
-                im.prossimo();
+            generaEvento();
+            round++;
+            System.out.println("Round: " + round);
+            stampa();
+            im.prossimo();
         }
     }
     
