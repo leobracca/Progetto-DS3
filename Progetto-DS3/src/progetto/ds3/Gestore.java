@@ -71,6 +71,10 @@ public class Gestore {
     void combatti(int n){
         boolean combatti = true;
         while(combatti == true){
+            stampa();
+            stampaBoss(n);
+            
+            im.prossimo();
             boss.get(n).setVita(personaggi.get(0).getDanni());
         
             if(boss.get(n).getVita() <= 0){
@@ -143,6 +147,14 @@ public class Gestore {
     void stampa(){
         for(Personaggio p: personaggi){
             System.out.println("Nome: " + p.getNome() + " vita: " + p.getVita() + " danni: " + p.getDanni()+ " energia: " + p.getEnergia());
+        }
+    }
+    
+    void stampaBoss(int n){
+        for(Boss b: boss){
+            if(b.getNome().equals(boss.get(n).getNome())){
+                System.out.println("Nome: " + b.getNome() + " vita: " + b.getVita() + " danni: " + b.getDanni());
+            }
         }
     }
 }
