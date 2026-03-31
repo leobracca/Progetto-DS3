@@ -41,6 +41,10 @@ public class Personaggio {
     int getDanni() {
         return danni;
     }
+
+    void setVita(int n) {
+        vita = vita - n;
+    }
     
     
 }

@@ -22,7 +22,7 @@ public class Inventario {
         return quantita;
     }
     
-    void setQuantita(){
-        quantita++;
+    void setQuantita(int q){
+        quantita = quantita + q;
     }
 }

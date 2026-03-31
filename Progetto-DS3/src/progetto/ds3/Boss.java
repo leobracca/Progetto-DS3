@@ -30,5 +30,8 @@ public class Boss {
     int getDanni() {
         return danni;
     }
-    
+
+    void setVita(int n) {
+        vita = vita - n;
+    }
 }
