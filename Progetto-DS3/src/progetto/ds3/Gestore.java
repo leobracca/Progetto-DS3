@@ -51,6 +51,8 @@ public class Gestore {
             System.out.println("Round: " + round);
             stampa();
             im.prossimo();
+            stampaInventario();
+            im.prossimo();          
         }
     }
     
@@ -117,6 +119,7 @@ public class Gestore {
                 if(nome.equals(inventario.get(j).getNome())){
                     inventario.get(j).setQuantita(-1);
                     check = true;
+                    System.out.println("Aumentata quantità " + inventario.get(j).getQuantita());
                 }
             }
         }
@@ -125,6 +128,7 @@ public class Gestore {
             Inventario i = new Inventario();
             inventario.add(i);
             inventario.get(inventario.size()-1).setQuantita(-1);
+            System.out.println("Aggiunto oggetto");
         }
     }
     
@@ -135,10 +139,12 @@ public class Gestore {
             if(nome.equals(inventario.get(i).getNome())){
                 if(inventario.get(i).getQuantita() <= 1){
                     inventario.remove(i);
+                    System.out.println("Rimosso " + inventario.get(i).getQuantita());
                 }
 
                 else{
                     inventario.get(i).setQuantita(-1);
+                    System.out.println("Diminuita quantità " + inventario.get(i).getQuantita());
                 }
             }
         }
@@ -155,6 +161,13 @@ public class Gestore {
             if(b.getNome().equals(boss.get(n).getNome())){
                 System.out.println("Nome: " + b.getNome() + " vita: " + b.getVita() + " danni: " + b.getDanni());
             }
+        }
+    }
+    
+    void stampaInventario(){
+        System.out.println("INVENTARIO:");
+        for(Inventario i: inventario){
+            System.out.println("Nome: " + i.getNome() + " quantità: " + i.getQuantita());
         }
     }
 }
