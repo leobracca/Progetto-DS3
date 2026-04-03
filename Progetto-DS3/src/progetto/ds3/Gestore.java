@@ -47,12 +47,11 @@ public class Gestore {
     
     void iniziaGioco(){
         for(int i = 1; i <= 10 && personaggi.size() >= 1; i++){
-            System.out.println("Round: " + round);
-            generaEvento();
-            stampa();
             im.prossimo();
+            System.out.println("Round: " + round);
+            stampa();
             stampaInventario();
-            im.prossimo();       
+            generaEvento();      
             round++;
         }
     }
@@ -75,6 +74,7 @@ public class Gestore {
         combatti = true;
         while(combatti == true){
             stampa();
+            stampaInventario();
             stampaBoss(n);
             
             im.prossimo();
@@ -106,7 +106,7 @@ public class Gestore {
             }
             
             else{
-                personaggi.get(0).setVita(-10);
+                personaggi.get(0).setVita(+10);
                 checkSconfitto();
             }
         }
@@ -174,6 +174,7 @@ public class Gestore {
         if(personaggi.get(0).getVita() <= 0){
             System.out.println("Sei morto");
             personaggi.remove(0);
+            combatti = false;
         }
     }
 }
