@@ -1,9 +1,9 @@
 Nome,Vita,Danni,Energia
-Estus,30,0,10
-Brace,200,200,200
+Estus,30,0,5
+Brace,125,30,20
 Resina dorata,0,30,10
 Lastra di Titanite,0,50,-10
 Anello vitale,30,0,10
-Anello della cloranzia,0,0,100
+Anello della cloranzia,0,0,30
 Anello della benevolenza,20,20,20
 Anello dell' estus,50,0,10

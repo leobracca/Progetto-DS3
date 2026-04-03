@@ -1,4 +1,4 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -9,8 +9,9 @@ import java.util.*;
  * @author braccalenti.leonardo
  */
 public class Gestore {
-    private int round = 0;
+    private int round = 1;
     private int n;
+    boolean combatti = true;
     private ArrayList<Personaggio>personaggi = new ArrayList<>();
     private ArrayList<Boss>boss = new ArrayList<>();
     private ArrayList<Oggetto>oggetti = new ArrayList<>();
@@ -45,20 +46,20 @@ public class Gestore {
     }
     
     void iniziaGioco(){
-        for(int i = 0; i < 10 && personaggi.size() >= 1; i++){
-            generaEvento();
-            round++;
+        for(int i = 1; i <= 10 && personaggi.size() >= 1; i++){
             System.out.println("Round: " + round);
+            generaEvento();
             stampa();
             im.prossimo();
             stampaInventario();
-            im.prossimo();          
+            im.prossimo();       
+            round++;
         }
     }
     
     void generaEvento(){
         n = im.generaNumero(0, 101);
-        if(n <= 50){
+        if(n <= 25){
             System.out.println("Boss");
             n = im.generaNumero(0, boss.size());
             combatti(n);
@@ -71,7 +72,7 @@ public class Gestore {
     }
     
     void combatti(int n){
-        boolean combatti = true;
+        combatti = true;
         while(combatti == true){
             stampa();
             stampaBoss(n);
@@ -87,14 +88,8 @@ public class Gestore {
             }
 
             else{
-                personaggi.get(0).setVita(boss.get(n).getDanni());
-
-                if(personaggi.get(0).getVita() <= 0){
-                    personaggi.remove(0);
-                    combatti = false;
-                    
-                    System.out.println("Hai perso il combattimento");
-                }
+                personaggi.get(0).setVita(boss.get(n).getDanni());               
+                checkSconfitto();
             }
         }
     }
@@ -106,7 +101,14 @@ public class Gestore {
         }
         
         else{
-            removeOggetti();
+            if(inventario.size() >= 1){
+                removeOggetti();
+            }
+            
+            else{
+                personaggi.get(0).setVita(-10);
+                checkSconfitto();
+            }
         }
     }
     
@@ -114,20 +116,17 @@ public class Gestore {
         boolean check = false;
         n = im.generaNumero(0, oggetti.size());
         String nome = oggetti.get(n).getNome();
-        for(int i = 0; i < oggetti.size(); i++){
-            for(int j = 0; j < inventario.size(); j++){
-                if(nome.equals(inventario.get(j).getNome())){
-                    inventario.get(j).setQuantita(-1);
-                    check = true;
-                    System.out.println("Aumentata quantità " + inventario.get(j).getQuantita());
-                }
+        for(int j = 0; j < inventario.size(); j++){
+            if(nome.equals(inventario.get(j).getNome())){
+                inventario.get(j).setQuantita(+1);
+                check = true;
+                System.out.println("Aumentata quantita " + inventario.get(j).getQuantita());
             }
         }
 
         if(check == false){
-            Inventario i = new Inventario();
+            Inventario i = new Inventario(oggetti.get(n).getNome(), oggetti.get(n).getVita(), oggetti.get(n).getDanni(), oggetti.get(n).getEnergia());
             inventario.add(i);
-            inventario.get(inventario.size()-1).setQuantita(-1);
             System.out.println("Aggiunto oggetto");
         }
     }
@@ -144,7 +143,7 @@ public class Gestore {
 
                 else{
                     inventario.get(i).setQuantita(-1);
-                    System.out.println("Diminuita quantità " + inventario.get(i).getQuantita());
+                    System.out.println("Diminuita quantita " + inventario.get(i).getQuantita());
                 }
             }
         }
@@ -167,7 +166,14 @@ public class Gestore {
     void stampaInventario(){
         System.out.println("INVENTARIO:");
         for(Inventario i: inventario){
-            System.out.println("Nome: " + i.getNome() + " quantità: " + i.getQuantita());
+            System.out.println("Nome: " + i.getNome() + ", Quantita: " + i.getQuantita() + ", Energia: " + i.getEnergia() + ", Vita: " + i.getVita() + ", Danni: " + i.getDanni());
+        }
+    }
+    
+    void checkSconfitto(){
+        if(personaggi.get(0).getVita() <= 0){
+            System.out.println("Sei morto");
+            personaggi.remove(0);
         }
     }
 }

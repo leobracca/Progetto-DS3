@@ -25,5 +25,15 @@ class Oggetto {
         return nome;
     }
     
+    Integer getVita(){
+        return vita;
+    }
     
+    Integer getDanni(){
+        return danni;
+    }
+    
+    Integer getEnergia(){
+        return energia;
+    }
 }

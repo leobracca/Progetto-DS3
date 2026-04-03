@@ -10,9 +10,17 @@ package progetto.ds3;
  */
 public class Inventario {
     private String nome;
-    private int quantita;
-    private int fame;
+    private int quantita = 1;
+    private int energia;
     private int vita;
+    private int danni;
+
+    Inventario(String nome, Integer vita, Integer danni, Integer energia) {
+        this.nome = nome;
+        this.vita = vita;
+        this.danni = danni;
+        this.energia = energia;
+    }
     
     String getNome(){
         return nome;
@@ -24,5 +32,17 @@ public class Inventario {
     
     void setQuantita(int q){
         quantita = quantita + q;
+    }
+
+    Integer getEnergia() {
+        return energia;
+    }
+
+    Integer getVita() {
+        return vita;    
+    }
+
+    Integer getDanni() {
+        return danni;
     }
 }
