@@ -47,9 +47,18 @@ public class Personaggio {
     boolean getAbilita(){
         return abilita;
     }
+    
+    int getPunti(){
+        return punteggio;
+    }
 
     void setVita(int n) {
-        vita = vita - n;
+        vita = vita + n;
+    }
+    
+    void setPuntiEnergia(int i, int j){
+        punteggio = punteggio + i;
+        energia = energia + j;
     }
     
     void addOggetti(int n, ArrayList<Oggetto> oggetti){
@@ -68,6 +77,8 @@ public class Personaggio {
             inventario.add(i);
             System.out.println("Aggiunto oggetto");
         }
+        
+        setPuntiEnergia(+1, 0);
     }
     
     void removeOggetti(int n, ArrayList<Oggetto> oggetti){
@@ -100,12 +111,15 @@ public class Personaggio {
             inventario.get(i).setQuantita(-1);
             System.out.println("Diminuita quantita " + inventario.get(i).getQuantita());
         }
+        
+        setPuntiEnergia(-2, -1);
     }
     
     boolean usaFuga(String s){
         if("si".equals(s)){
             abilita = false;
             System.out.println("Abilita usata, salti il combattimento");
+            setPuntiEnergia(-5, +1);
             return false;
         }
         

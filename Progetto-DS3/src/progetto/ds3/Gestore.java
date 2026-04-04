@@ -11,6 +11,7 @@ import java.util.*;
 public class Gestore {
     private int round = 1;
     private int n;
+    private int c = 0;
     boolean combatti = true;
     private ArrayList<Personaggio>personaggi = new ArrayList<>();
     private ArrayList<Boss>boss = new ArrayList<>();
@@ -45,14 +46,17 @@ public class Gestore {
     }
     
     void iniziaGioco(){
-        for(int i = 1; i <= 10 && personaggi.size() >= 1; i++){
+        for(round = 1; round <= 10 && personaggi.size() >= 1; round ++){
             im.prossimo();
             System.out.println("Round: " + round);
-            stampa();
-            stampaInventario();
-            usaOggetto();
-            generaEvento();      
-            round++;
+            checkEnergia();
+            if(personaggi.size() >= 1){
+                stampa();
+                stampaInventario();
+                usaOggetto();
+                puntiEnergia(+1, -1);
+                generaEvento();     
+            }  
         }
     }
     
@@ -71,8 +75,10 @@ public class Gestore {
     }
     
     void combatti(int n){
+        combatti = true;
         usareAbilita();
         while(combatti == true){
+            puntiEnergia(-2, +3);
             stampa();
             stampaInventario();
             stampaBoss(n);
@@ -83,7 +89,7 @@ public class Gestore {
             if(boss.get(n).getVita() <= 0){
                 boss.remove(n);
                 combatti = false;
-                
+                puntiEnergia(10, 3);
                 System.out.println("Hai vinto il combattimento");
             }
 
@@ -113,7 +119,7 @@ public class Gestore {
             }
             
             else{
-                personaggi.get(0).setVita(+10);
+                personaggi.get(0).setVita(-10);
                 checkSconfitto();
             }
         }
@@ -130,14 +136,27 @@ public class Gestore {
     }
     
     void usaOggetto(){
-        String s = im.sceltaOggetto();
-        personaggi.get(0).usaOggetto(s);
+        if(personaggi.get(0).sizeInventario() >= 1){
+            String s = im.sceltaOggetto();
+            personaggi.get(0).usaOggetto(s);
+        }
+    }
+    
+    void checkEnergia(){
+        if(personaggi.get(0).getEnergia() <= 0){
+            c++;
+            checkSconfitto();
+        }
+        
+        else{
+            c = 0;
+        }
     }
     
     void stampa(){
         System.out.println("STATUS GIOCATORE:");
         for(Personaggio p: personaggi){
-            System.out.println("Nome: " + p.getNome() + " vita: " + p.getVita() + " danni: " + p.getDanni()+ " energia: " + p.getEnergia());
+            System.out.println("Nome: " + p.getNome() + " vita: " + p.getVita() + " danni: " + p.getDanni()+ " energia: " + p.getEnergia() + " punti: " + p.getPunti());
         }
     }
     
@@ -149,12 +168,16 @@ public class Gestore {
         }
     }
     
+    void puntiEnergia(int i, int j){
+        personaggi.get(0).setPuntiEnergia(i, j);
+    }
+    
     void stampaInventario(){
         personaggi.get(0).stampaInventario();
     }
     
     void checkSconfitto(){
-        if(personaggi.get(0).getVita() <= 0){
+        if(personaggi.get(0).getVita() <= 0 || c >= 3){
             System.out.println("Sei morto");
             personaggi.remove(0);
             combatti = false;
