@@ -70,16 +70,31 @@ public class Personaggio {
         String nomeOgg = inventario.get(n).getNome();
         for(int i = 0; i < inventario.size(); i++){
             if(nomeOgg.equals(inventario.get(i).getNome())){
-                if(inventario.get(i).getQuantita() <= 1){
-                    inventario.remove(i);
-                    System.out.println("Rimosso " + inventario.get(i).getQuantita());
-                }
-
-                else{
-                    inventario.get(i).setQuantita(-1);
-                    System.out.println("Diminuita quantita " + inventario.get(i).getQuantita());
-                }
+                diminuireQuantita(i);
             }
+        }
+    }
+    
+    void usaOggetto(String s){
+        for(int i = 0; i < inventario.size(); i++){
+            if((inventario.get(i).getNome()).equals(s)){
+                vita += inventario.get(i).getVita();
+                energia += inventario.get(i).getEnergia();
+                danni += inventario.get(i).getDanni();
+                diminuireQuantita(i);    
+            }
+        }
+    }
+    
+    void diminuireQuantita(int i){
+        if(inventario.get(i).getQuantita() <= 1){
+            System.out.println("Rimosso " + inventario.get(i).getQuantita());
+            inventario.remove(i);
+        }
+
+        else{
+            inventario.get(i).setQuantita(-1);
+            System.out.println("Diminuita quantita " + inventario.get(i).getQuantita());
         }
     }
     

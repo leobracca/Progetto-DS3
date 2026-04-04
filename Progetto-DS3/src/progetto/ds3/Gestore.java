@@ -50,6 +50,8 @@ public class Gestore {
             System.out.println("Round: " + round);
             stampa();
             stampaInventario();
+            usaOggetto();
+            im.prossimo();
             generaEvento();      
             round++;
         }
@@ -119,6 +121,11 @@ public class Gestore {
     void removeOggetti(){
         n = im.generaNumero(0, personaggi.get(0).sizeInventario());
         personaggi.get(0).removeOggetti(n, oggetti);
+    }
+    
+    void usaOggetto(){
+        String s = im.sceltaOggetto();
+        personaggi.get(0).usaOggetto(s);
     }
     
     void stampa(){

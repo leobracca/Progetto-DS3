@@ -17,9 +17,9 @@ public class InputManager {
     
     String sceltaPersonaggio(){
         System.out.println("Quale personaggio scegli?");
-        String nPersonaggio = s.nextLine();
+        scelta = s.nextLine();
         
-        return nPersonaggio;
+        return scelta;
     }
     
     void prossimo(){
@@ -29,5 +29,21 @@ public class InputManager {
     Integer generaNumero(int min, int max){
         n = r.nextInt(min, max);
         return n;
+    }
+    
+    String sceltaOggetto(){
+        System.out.println("Vuoi usare un oggetto?");
+        scelta = s.nextLine();
+        
+        if("si".equals(scelta)){
+            System.out.println("Quale oggetto vuoi usare?");
+            scelta = s.nextLine();
+        }
+        
+        else{
+            return scelta = "null";
+        }
+        
+        return scelta;
     }
 }
