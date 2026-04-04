@@ -24,8 +24,6 @@ public class Personaggio {
         this.danni = Integer.parseInt(danni);
     }
     
-    
-    
     String getNome(){
         return nome;
     }
@@ -41,10 +39,56 @@ public class Personaggio {
     int getDanni() {
         return danni;
     }
+    
+    int sizeInventario(){
+        return inventario.size();
+    }
 
     void setVita(int n) {
         vita = vita - n;
     }
     
+    void addOggetti(int n, ArrayList<Oggetto> oggetti){
+        String nomeOgg = oggetti.get(n).getNome();
+        boolean check = false;
+        for(int j = 0; j < inventario.size(); j++){
+            if(nomeOgg.equals(inventario.get(j).getNome())){
+                inventario.get(j).setQuantita(+1);
+                check = true;
+                System.out.println("Aumentata quantita " + inventario.get(j).getQuantita());
+            }
+        }
+
+        if(check == false){
+            Inventario i = new Inventario(oggetti.get(n).getNome(), oggetti.get(n).getVita(), oggetti.get(n).getDanni(), oggetti.get(n).getEnergia());
+            inventario.add(i);
+            System.out.println("Aggiunto oggetto");
+        }
+    }
     
+    void removeOggetti(int n, ArrayList<Oggetto> oggetti){
+        String nomeOgg = inventario.get(n).getNome();
+        for(int i = 0; i < inventario.size(); i++){
+            if(nomeOgg.equals(inventario.get(i).getNome())){
+                if(inventario.get(i).getQuantita() <= 1){
+                    inventario.remove(i);
+                    System.out.println("Rimosso " + inventario.get(i).getQuantita());
+                }
+
+                else{
+                    inventario.get(i).setQuantita(-1);
+                    System.out.println("Diminuita quantita " + inventario.get(i).getQuantita());
+                }
+            }
+        }
+    }
+    
+    void stampaInventario(){
+        System.out.println("INVENTARIO:");
+        for(Inventario i: inventario){
+            System.out.println("Nome: " + i.getNome() + ", Quantita: " + i.getQuantita() + ", Energia: " + i.getEnergia() + ", Vita: " + i.getVita() + ", Danni: " + i.getDanni());
+        }
+        
+        System.out.println();
+    }
 }

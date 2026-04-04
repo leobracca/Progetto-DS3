@@ -15,7 +15,6 @@ public class Gestore {
     private ArrayList<Personaggio>personaggi = new ArrayList<>();
     private ArrayList<Boss>boss = new ArrayList<>();
     private ArrayList<Oggetto>oggetti = new ArrayList<>();
-    private ArrayList<Inventario>inventario = new ArrayList<>();
     
     FileManager fm = new FileManager();
     InputManager im = new InputManager();
@@ -101,7 +100,7 @@ public class Gestore {
         }
         
         else{
-            if(inventario.size() >= 1){
+            if(personaggi.get(0).sizeInventario() >= 1){
                 removeOggetti();
             }
             
@@ -113,40 +112,13 @@ public class Gestore {
     }
     
     void addOggetti(){
-        boolean check = false;
-        n = im.generaNumero(0, oggetti.size());
-        String nome = oggetti.get(n).getNome();
-        for(int j = 0; j < inventario.size(); j++){
-            if(nome.equals(inventario.get(j).getNome())){
-                inventario.get(j).setQuantita(+1);
-                check = true;
-                System.out.println("Aumentata quantita " + inventario.get(j).getQuantita());
-            }
-        }
-
-        if(check == false){
-            Inventario i = new Inventario(oggetti.get(n).getNome(), oggetti.get(n).getVita(), oggetti.get(n).getDanni(), oggetti.get(n).getEnergia());
-            inventario.add(i);
-            System.out.println("Aggiunto oggetto");
-        }
+        n = im.generaNumero(0, oggetti.size());        
+        personaggi.get(0).addOggetti(n, oggetti);
     }
     
     void removeOggetti(){
-        n = im.generaNumero(0, inventario.size());
-        String nome = inventario.get(n).getNome();
-        for(int i = 0; i < inventario.size(); i++){
-            if(nome.equals(inventario.get(i).getNome())){
-                if(inventario.get(i).getQuantita() <= 1){
-                    inventario.remove(i);
-                    System.out.println("Rimosso " + inventario.get(i).getQuantita());
-                }
-
-                else{
-                    inventario.get(i).setQuantita(-1);
-                    System.out.println("Diminuita quantita " + inventario.get(i).getQuantita());
-                }
-            }
-        }
+        n = im.generaNumero(0, personaggi.get(0).sizeInventario());
+        personaggi.get(0).removeOggetti(n, oggetti);
     }
     
     void stampa(){
@@ -164,10 +136,7 @@ public class Gestore {
     }
     
     void stampaInventario(){
-        System.out.println("INVENTARIO:");
-        for(Inventario i: inventario){
-            System.out.println("Nome: " + i.getNome() + ", Quantita: " + i.getQuantita() + ", Energia: " + i.getEnergia() + ", Vita: " + i.getVita() + ", Danni: " + i.getDanni());
-        }
+        personaggi.get(0).stampaInventario();
     }
     
     void checkSconfitto(){
