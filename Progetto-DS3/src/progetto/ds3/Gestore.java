@@ -51,7 +51,6 @@ public class Gestore {
             stampa();
             stampaInventario();
             usaOggetto();
-            im.prossimo();
             generaEvento();      
             round++;
         }
@@ -72,7 +71,7 @@ public class Gestore {
     }
     
     void combatti(int n){
-        combatti = true;
+        usareAbilita();
         while(combatti == true){
             stampa();
             stampaInventario();
@@ -92,6 +91,13 @@ public class Gestore {
                 personaggi.get(0).setVita(boss.get(n).getDanni());               
                 checkSconfitto();
             }
+        }
+    }
+    
+    void usareAbilita(){
+        if(personaggi.get(0).getAbilita() == true){
+            String s = im.fuga();
+            combatti = personaggi.get(0).usaFuga(s);
         }
     }
     
@@ -129,6 +135,7 @@ public class Gestore {
     }
     
     void stampa(){
+        System.out.println("STATUS GIOCATORE:");
         for(Personaggio p: personaggi){
             System.out.println("Nome: " + p.getNome() + " vita: " + p.getVita() + " danni: " + p.getDanni()+ " energia: " + p.getEnergia());
         }

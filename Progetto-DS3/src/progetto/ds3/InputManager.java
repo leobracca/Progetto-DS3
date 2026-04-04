@@ -46,4 +46,10 @@ public class InputManager {
         
         return scelta;
     }
+    
+    String fuga(){
+        System.out.println("Vuoi saltare il combattimento?");
+        scelta = s.nextLine();
+        return scelta;
+    }
 }

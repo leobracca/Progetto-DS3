@@ -14,7 +14,7 @@ public class Personaggio {
     private int vita;
     private int energia;
     private int danni;
-    private boolean abilita;
+    private boolean abilita = true;
     private ArrayList<Inventario>inventario = new ArrayList<>();
 
     public Personaggio(String nome, String vita, String energia, String danni) {
@@ -28,7 +28,7 @@ public class Personaggio {
         return nome;
     }
     
-    Integer getVita(){
+    int getVita(){
         return vita;
     }
 
@@ -42,6 +42,10 @@ public class Personaggio {
     
     int sizeInventario(){
         return inventario.size();
+    }
+    
+    boolean getAbilita(){
+        return abilita;
     }
 
     void setVita(int n) {
@@ -95,6 +99,18 @@ public class Personaggio {
         else{
             inventario.get(i).setQuantita(-1);
             System.out.println("Diminuita quantita " + inventario.get(i).getQuantita());
+        }
+    }
+    
+    boolean usaFuga(String s){
+        if("si".equals(s)){
+            abilita = false;
+            System.out.println("Abilita usata, salti il combattimento");
+            return false;
+        }
+        
+        else{
+            return true;
         }
     }
     
