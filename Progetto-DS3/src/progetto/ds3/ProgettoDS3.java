@@ -14,8 +14,8 @@ public class ProgettoDS3 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Gestore g = new Gestore();
-        g.init();
+        PlayForm f = new PlayForm();
+        f.setVisible(true);
     } 
     
 }

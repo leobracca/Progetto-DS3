@@ -23,9 +23,9 @@ public class Gestore {
     
     void init(){
         leggiFile();
-        addPersonaggio();
-        stampa();
-        iniziaGioco();
+        //addPersonaggio();
+        //stampa();
+        //iniziaGioco();
     }
     
     void leggiFile(){
@@ -34,9 +34,7 @@ public class Gestore {
         fm.leggiOggetti(oggetti);
     }
     
-    void addPersonaggio(){
-        String nPersonaggio = im.sceltaPersonaggio();
-        
+    void addPersonaggio(String nPersonaggio){
         for(int i = 0; i < personaggi.size(); i++){
             if(!nPersonaggio.equals(personaggi.get(i).getNome())){
                 personaggi.remove(i);
@@ -182,5 +180,9 @@ public class Gestore {
             personaggi.remove(0);
             combatti = false;
         }
+    }
+    
+    ArrayList<Personaggio> getPersonaggio(){
+        return personaggi;
     }
 }

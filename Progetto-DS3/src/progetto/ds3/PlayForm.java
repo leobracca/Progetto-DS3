@@ -9,7 +9,8 @@ package progetto.ds3;
  * @author lbrac
  */
 public class PlayForm extends javax.swing.JFrame {
-    
+    Gestore g;
+    StartGameForm gf;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PlayForm.class.getName());
 
     /**
@@ -17,6 +18,15 @@ public class PlayForm extends javax.swing.JFrame {
      */
     public PlayForm() {
         initComponents();
+        
+        //Finestra grandezza fissa e non modificabile visibile al centro dello schermo
+        this.setSize(610, 375);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        
+        g = new Gestore();
+        
+        txt_info.setVisible(false);
     }
 
     /**
@@ -28,40 +38,102 @@ public class PlayForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btn_cavaliere = new javax.swing.JButton();
+        btn_mago = new javax.swing.JButton();
+        btn_vichingo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        btn_info = new javax.swing.JButton();
+        txt_info = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("jButton1");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
+        btn_cavaliere.setText("Cavaliere");
+        btn_cavaliere.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cavaliereActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_cavaliere, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
 
-        jButton2.setText("jButton2");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, -1, -1));
+        btn_mago.setText("Mago");
+        btn_mago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_magoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_mago, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, -1, -1));
 
-        jButton3.setText("jButton3");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, -1, -1));
+        btn_vichingo.setText("Vichingo");
+        btn_vichingo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_vichingoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_vichingo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, -1, -1));
 
         jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
 
         jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, -1, -1));
 
         jLabel3.setText("jLabel3");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, -1, -1));
 
-        jButton4.setText("jButton4");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, -1));
+        btn_info.setText("Informazioni");
+        btn_info.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_infoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_info, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, -1, -1));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        txt_info.setViewportView(jTextArea1);
+
+        getContentPane().add(txt_info, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 460, 220));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_infoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_infoActionPerformed
+        if(txt_info.isVisible()){
+            txt_info.setVisible(false);
+        }
+        
+        else{
+            txt_info.setVisible(true);
+        }
+    }//GEN-LAST:event_btn_infoActionPerformed
+
+    private void btn_cavaliereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cavaliereActionPerformed
+        g.init();
+        g.addPersonaggio("Cavaliere");
+        gf = new StartGameForm(g);
+        gf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_cavaliereActionPerformed
+
+    private void btn_magoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_magoActionPerformed
+        g.init();
+        g.addPersonaggio("Mago");
+        gf = new StartGameForm(g);
+        gf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_magoActionPerformed
+
+    private void btn_vichingoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_vichingoActionPerformed
+        g.init();
+        g.addPersonaggio("Vichingo");
+        gf = new StartGameForm(g);
+        gf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_vichingoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -89,12 +161,14 @@ public class PlayForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btn_cavaliere;
+    private javax.swing.JButton btn_info;
+    private javax.swing.JButton btn_mago;
+    private javax.swing.JButton btn_vichingo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane txt_info;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,14 +9,23 @@ package progetto.ds3;
  * @author lbrac
  */
 public class StartGameForm extends javax.swing.JFrame {
-    
+    Gestore g;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(StartGameForm.class.getName());
 
     /**
      * Creates new form StartGameForm
+     * @param gestore
      */
-    public StartGameForm() {
+    public StartGameForm(Gestore gestore) {
         initComponents();
+        this.setSize(610, 375);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        
+        this.g = gestore;  
+        
+        txt_status1.setVisible(false);
+        txt_status.setVisible(false);
     }
 
     /**
@@ -28,37 +37,54 @@ public class StartGameForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btn_inizio = new javax.swing.JButton();
+        txt_status1 = new javax.swing.JScrollPane();
+        txt_status = new javax.swing.JTextArea();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_inizio.setText("Inizio");
+        btn_inizio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_inizioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_inizio, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, -1, -1));
+
+        txt_status.setEditable(false);
+        txt_status.setColumns(20);
+        txt_status.setRows(5);
+        txt_status.setFocusable(false);
+        txt_status1.setViewportView(txt_status);
+
+        getContentPane().add(txt_status1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_inizioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inizioActionPerformed
+        Personaggio p = g.getPersonaggio().get(0);
+        
+        String statistiche ="NOME: " + p.getNome() + "\n"
+                       + "VITA: " + p.getVita() + "\n"
+                       + "DANNI: " + p.getDanni() + "\n"
+                       + "ENERGIA: " + p.getEnergia() + "\n"
+                       + "PUNTI: " + p.getPunti();
+        
+        txt_status1.setVisible(true);
+        txt_status.setVisible(true);
+        txt_status.setText(statistiche);
+        btn_inizio.setVisible(false);
+    }//GEN-LAST:event_btn_inizioActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new StartGameForm().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_inizio;
+    private javax.swing.JTextArea txt_status;
+    private javax.swing.JScrollPane txt_status1;
     // End of variables declaration//GEN-END:variables
 }
