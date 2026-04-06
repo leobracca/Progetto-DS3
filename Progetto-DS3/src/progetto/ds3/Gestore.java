@@ -9,10 +9,12 @@ import java.util.*;
  * @author braccalenti.leonardo
  */
 public class Gestore {
-    private int round = 1;
+    private int round = 0;
     private int n;
     private int c = 0;
-    boolean combatti = true;
+    
+    private Boss bossAttuale = null;
+    
     private ArrayList<Personaggio>personaggi = new ArrayList<>();
     private ArrayList<Boss>boss = new ArrayList<>();
     private ArrayList<Oggetto>oggetti = new ArrayList<>();
@@ -43,82 +45,90 @@ public class Gestore {
         }
     }
     
-    void iniziaGioco(){
-        for(round = 1; round <= 10 && personaggi.size() >= 1; round ++){
-            im.prossimo();
-            System.out.println("Round: " + round);
-            checkEnergia();
-            if(personaggi.size() >= 1){
-                stampa();
-                stampaInventario();
-                usaOggetto();
-                puntiEnergia(+1, -1);
-                generaEvento();     
-            }  
+    String iniziaGioco(){
+        round++;
+        if(round > 10){
+            return "VITTORIA";
         }
+        
+        checkEnergia();
+        puntiEnergia(1, -1);
+        
+        return generaEvento();
     }
     
-    void generaEvento(){
+    String generaEvento(){
         n = im.generaNumero(0, 101);
         if(n <= 25){
-            System.out.println("Boss");
             n = im.generaNumero(0, boss.size());
-            combatti(n);
+            this.bossAttuale = boss.get(n);
+            return "Boss";   
         }
         
-        else{
-            System.out.println("Oggetti");
-            gestioneOggetti();
-        }
+        return gestioneOggetti();
     }
     
-    void combatti(int n){
-        combatti = true;
-        usareAbilita();
-        while(combatti == true){
-            puntiEnergia(-2, +3);
-            stampa();
-            stampaInventario();
-            stampaBoss(n);
-            
-            im.prossimo();
-            boss.get(n).setVita(personaggi.get(0).getDanni());
-        
-            if(boss.get(n).getVita() <= 0){
-                boss.remove(n);
-                combatti = false;
-                puntiEnergia(10, 3);
-                System.out.println("Hai vinto il combattimento");
-            }
+    String combatti(int n){
+        if(bossAttuale == null){
+            return "";
+        }
 
-            else{
-                personaggi.get(0).setVita(boss.get(n).getDanni());               
-                checkSconfitto();
+        Personaggio p = personaggi.get(0);
+        String stringa = "";
+        
+        puntiEnergia(-2, +3);
+        
+        bossAttuale.setVita(p.getDanni());
+        stringa += "Attacchi il boss " + bossAttuale.getNome() + " per " + p.getDanni() + " danni \n";
+
+        if(bossAttuale.getVita() <= 0){
+            stringa += "Hai sconfitto " + bossAttuale.getNome() + ", puoi continuare \n";
+            puntiEnergia(10, 3);
+            bossAttuale = null;
+        }
+
+        else{
+            p.setVita(bossAttuale.getDanni());               
+            stringa += bossAttuale.getNome() + " ti colpisce per " + bossAttuale.getDanni() + " danni \n";
+        
+            if(p.getVita() <= 0){
+                stringa += "SEI MORTO \n";
             }
         }
+        
+        
+        return stringa;
     }
     
-    void usareAbilita(){
-        if(personaggi.get(0).getAbilita() == true){
-            String s = im.fuga();
-            combatti = personaggi.get(0).usaFuga(s);
+    String usareAbilita(){
+        Personaggio p = personaggi.get(0);
+        
+        if(p.getAbilita()){
+            p.usaFuga();
+            this.bossAttuale = null;
+            return "Abilita usata, salti il combattimento";
         }
+
+        return "Abilita non usata";
     }
     
-    void gestioneOggetti(){
+    String gestioneOggetti(){
         n = im.generaNumero(0,11);
         if(n < 6){
             addOggetti();
+            return "Oggetto trovato";
         }
         
         else{
             if(personaggi.get(0).sizeInventario() >= 1){
                 removeOggetti();
+                return "Oggetto perso";
             }
             
             else{
                 personaggi.get(0).setVita(-10);
                 checkSconfitto();
+                return "Trappola";
             }
         }
     }
@@ -178,11 +188,22 @@ public class Gestore {
         if(personaggi.get(0).getVita() <= 0 || c >= 3){
             System.out.println("Sei morto");
             personaggi.remove(0);
-            combatti = false;
         }
     }
     
     ArrayList<Personaggio> getPersonaggio(){
         return personaggi;
+    }
+
+    String getRound() {
+        return String.valueOf(round);
+    }
+
+    String getNomeBoss() {
+        if(bossAttuale == null){
+            return "No boss";
+        }
+        
+        return String.valueOf(bossAttuale.getNome());
     }
 }

@@ -24,6 +24,15 @@ public class StartGameForm extends javax.swing.JFrame {
         
         this.g = gestore;  
         
+        btn_round.setVisible(false);
+        btn_attacca.setVisible(false);
+        btn_abilita.setVisible(false);
+        btn_oggetto.setVisible(false);
+        
+        lbl_round.setVisible(false);
+        
+        txt_storia1.setVisible(false);
+        txt_storia.setVisible(false);
         txt_status1.setVisible(false);
         txt_status.setVisible(false);
     }
@@ -40,6 +49,13 @@ public class StartGameForm extends javax.swing.JFrame {
         btn_inizio = new javax.swing.JButton();
         txt_status1 = new javax.swing.JScrollPane();
         txt_status = new javax.swing.JTextArea();
+        btn_round = new javax.swing.JButton();
+        lbl_round = new javax.swing.JLabel();
+        btn_attacca = new javax.swing.JButton();
+        btn_abilita = new javax.swing.JButton();
+        btn_oggetto = new javax.swing.JButton();
+        txt_storia1 = new javax.swing.JScrollPane();
+        txt_storia = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -60,6 +76,42 @@ public class StartGameForm extends javax.swing.JFrame {
 
         getContentPane().add(txt_status1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
+        btn_round.setText("Round successivo");
+        btn_round.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_roundActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_round, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+
+        lbl_round.setText("Round: 0");
+        getContentPane().add(lbl_round, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        btn_attacca.setText("Attacca");
+        btn_attacca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_attaccaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_attacca, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, -1, -1));
+
+        btn_abilita.setText("Abilita");
+        btn_abilita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_abilitaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_abilita, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, -1, -1));
+
+        btn_oggetto.setText("oggetto");
+        getContentPane().add(btn_oggetto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, -1, -1));
+
+        txt_storia.setColumns(20);
+        txt_storia.setRows(5);
+        txt_storia1.setViewportView(txt_storia);
+
+        getContentPane().add(txt_storia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 240, 180));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -72,19 +124,119 @@ public class StartGameForm extends javax.swing.JFrame {
                        + "ENERGIA: " + p.getEnergia() + "\n"
                        + "PUNTI: " + p.getPunti();
         
+        btn_round.setVisible(true);
+        btn_attacca.setVisible(true);
+        btn_abilita.setVisible(true);
+        btn_oggetto.setVisible(true);
+        
+        lbl_round.setVisible(true);
+        
+        txt_storia1.setVisible(true);
+        txt_storia.setVisible(true);
         txt_status1.setVisible(true);
         txt_status.setVisible(true);
         txt_status.setText(statistiche);
         btn_inizio.setVisible(false);
     }//GEN-LAST:event_btn_inizioActionPerformed
 
+    private void btn_abilitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_abilitaActionPerformed
+        String risultato = g.usareAbilita();
+        txt_storia.append(risultato + "\n");
+        
+        if (risultato.equals("Abilita usata, salti il combattimento")) {
+            Personaggio p = g.getPersonaggio().get(0);
+            String statistiche = "NOME: " + p.getNome() + "\n"
+                               + "VITA: " + p.getVita() + "\n"
+                               + "DANNI: " + p.getDanni() + "\n"
+                               + "ENERGIA: " + p.getEnergia() + "\n"
+                               + "PUNTI: " + p.getPunti();
+            txt_status.setText(statistiche);
+            
+            btn_round.setEnabled(true);
+            btn_attacca.setEnabled(false);
+            btn_abilita.setEnabled(false);
+        }
+    }//GEN-LAST:event_btn_abilitaActionPerformed
+
+    private void btn_roundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_roundActionPerformed
+        String evento = g.iniziaGioco();
+        lbl_round.setText("Round: " + g.getRound());
+        
+        if(evento.equals("VITTORIA")){
+            this.dispose();
+        }
+        
+        else{
+            Personaggio p = g.getPersonaggio().get(0);
+            String statistiche = "NOME: " + p.getNome() + "\n"
+                       + "VITA: " + p.getVita() + "\n"
+                       + "DANNI: " + p.getDanni() + "\n"
+                       + "ENERGIA: " + p.getEnergia() + "\n"
+                       + "PUNTI: " + p.getPunti();
+            txt_status.setText(statistiche);
+            
+            if(p.getVita() <= 0){
+                this.dispose();
+            }
+            
+            if(evento.equals("Boss")){
+                txt_storia.append("--- ROUND " + g.getRound() + " ---\n");
+                txt_storia.append("ATTENZIONE: Appare " + g.getNomeBoss() + "!\n");
+                txt_storia.setEnabled(false);
+                btn_round.setEnabled(false);
+                btn_attacca.setEnabled(true);
+                btn_abilita.setEnabled(true);
+            }
+            
+            else{
+                txt_storia.append("---- ROUND " + g.getRound() + "----\n");
+                txt_storia.append("Evento: " + evento + "\n" );
+                btn_attacca.setEnabled(false);
+                btn_abilita.setEnabled(false);
+            }
+        }
+    }//GEN-LAST:event_btn_roundActionPerformed
+
+    private void btn_attaccaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_attaccaActionPerformed
+        String logAttacco = g.combatti(0);
+        txt_storia.append(logAttacco);
+        
+        if (!g.getPersonaggio().isEmpty()) {
+            Personaggio p = g.getPersonaggio().get(0);
+            String statistiche = "NOME: " + p.getNome() + "\n"
+                               + "VITA: " + p.getVita() + "\n"
+                               + "DANNI: " + p.getDanni() + "\n"
+                               + "ENERGIA: " + p.getEnergia() + "\n"
+                               + "PUNTI: " + p.getPunti();
+            txt_status.setText(statistiche);
+        
+            if (g.getNomeBoss().equals("No boss")) {
+                btn_attacca.setEnabled(false);
+                btn_abilita.setEnabled(false);
+                btn_round.setEnabled(true);
+                txt_storia.append("Vittoria! La strada è libera.\n");
+            }
+            
+                if (p.getVita() <= 0) {
+                this.dispose();
+            }
+        }
+    }//GEN-LAST:event_btn_attaccaActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_abilita;
+    private javax.swing.JButton btn_attacca;
     private javax.swing.JButton btn_inizio;
+    private javax.swing.JButton btn_oggetto;
+    private javax.swing.JButton btn_round;
+    private javax.swing.JLabel lbl_round;
     private javax.swing.JTextArea txt_status;
     private javax.swing.JScrollPane txt_status1;
+    private javax.swing.JTextArea txt_storia;
+    private javax.swing.JScrollPane txt_storia1;
     // End of variables declaration//GEN-END:variables
 }

@@ -115,17 +115,9 @@ public class Personaggio {
         setPuntiEnergia(-2, -1);
     }
     
-    boolean usaFuga(String s){
-        if("si".equals(s)){
-            abilita = false;
-            System.out.println("Abilita usata, salti il combattimento");
-            setPuntiEnergia(-5, +1);
-            return false;
-        }
-        
-        else{
-            return true;
-        }
+    void usaFuga(){
+        this.abilita = false;
+        setPuntiEnergia(-5, +1);
     }
     
     void stampaInventario(){
