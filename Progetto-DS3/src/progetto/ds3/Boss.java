@@ -3,12 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package progetto.ds3;
-
+import java.io.*;
 /**
  *
  * @author braccalenti.leonardo
  */
-public class Boss {
+public class Boss implements Serializable{
     private String nome;
     private int vita;
     private int danni;

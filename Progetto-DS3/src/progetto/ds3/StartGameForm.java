@@ -18,9 +18,24 @@ public class StartGameForm extends javax.swing.JFrame {
      */
     public StartGameForm(Gestore gestore) {
         initComponents();
-        this.setSize(610, 375);
+        this.setSize(650, 400);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        
+        this.getContentPane().setBackground(new java.awt.Color(15, 15, 15));
+        java.awt.Color dsSfondo = new java.awt.Color(25, 25, 25);
+        java.awt.Color dsTesto = new java.awt.Color(180, 180, 160);
+        
+        txt_storia.setBackground(dsSfondo);
+        txt_storia.setForeground(dsTesto);
+        txt_storia.setCaretColor(java.awt.Color.WHITE);
+
+        txt_status.setBackground(dsSfondo);
+        txt_status.setForeground(dsTesto);
+
+        java.awt.Font dsFont = new java.awt.Font("Serif", java.awt.Font.PLAIN, 14);
+        txt_storia.setFont(dsFont);
+        txt_status.setFont(dsFont);
         
         this.g = gestore;  
         
@@ -104,6 +119,11 @@ public class StartGameForm extends javax.swing.JFrame {
         getContentPane().add(btn_abilita, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, -1, -1));
 
         btn_oggetto.setText("oggetto");
+        btn_oggetto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_oggettoActionPerformed(evt);
+            }
+        });
         getContentPane().add(btn_oggetto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, -1, -1));
 
         txt_storia.setColumns(20);
@@ -222,6 +242,21 @@ public class StartGameForm extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btn_attaccaActionPerformed
+
+    private void btn_oggettoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_oggettoActionPerformed
+        String messaggio = g.usaOggetto();
+        txt_storia.append("Usato: " + messaggio + "\n");
+        
+        if (!g.getPersonaggio().isEmpty()) {
+            Personaggio p = g.getPersonaggio().get(0);
+            String statistiche = "NOME: " + p.getNome() + "\n"
+                               + "VITA: " + p.getVita() + "\n"
+                               + "DANNI: " + p.getDanni() + "\n"
+                               + "ENERGIA: " + p.getEnergia() + "\n"
+                               + "PUNTI: " + p.getPunti();
+            txt_status.setText(statistiche);
+        }
+    }//GEN-LAST:event_btn_oggettoActionPerformed
 
     /**
      * @param args the command line arguments

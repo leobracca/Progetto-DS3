@@ -3,12 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package progetto.ds3;
-
+import java.io.*;
 /**
  *
  * @author braccalenti.leonardo
  */
-public class Inventario {
+public class Inventario implements Serializable{
     private String nome;
     private int quantita = 1;
     private int energia;

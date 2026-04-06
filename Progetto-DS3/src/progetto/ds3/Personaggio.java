@@ -4,11 +4,12 @@
  */
 package progetto.ds3;
 import java.util.*;
+import java.io.*;
 /**
  *
  * @author braccalenti.leonardo
  */
-public class Personaggio {
+public class Personaggio implements Serializable{
     private String nome;
     private int punteggio;
     private int vita;
@@ -90,15 +91,18 @@ public class Personaggio {
         }
     }
     
-    void usaOggetto(String s){
+    int usaOggetto(String s){
         for(int i = 0; i < inventario.size(); i++){
             if((inventario.get(i).getNome()).equals(s)){
                 vita += inventario.get(i).getVita();
                 energia += inventario.get(i).getEnergia();
                 danni += inventario.get(i).getDanni();
-                diminuireQuantita(i);    
+                diminuireQuantita(i);  
+                return 0;
             }
         }
+        
+        return 0;
     }
     
     void diminuireQuantita(int i){
@@ -127,5 +131,9 @@ public class Personaggio {
         }
         
         System.out.println();
+    }
+    
+    String nomeOggetto(int n){
+        return inventario.get(n).getNome();
     }
 }

@@ -4,11 +4,12 @@
  */
 package progetto.ds3;
 import java.util.*;
+import java.io.*;
 /**
  *
  * @author braccalenti.leonardo
  */
-public class Gestore {
+public class Gestore implements Serializable{
     private int round = 0;
     private int n;
     private int c = 0;
@@ -143,11 +144,17 @@ public class Gestore {
         personaggi.get(0).removeOggetti(n, oggetti);
     }
     
-    void usaOggetto(){
-        if(personaggi.get(0).sizeInventario() >= 1){
-            String s = im.sceltaOggetto();
-            personaggi.get(0).usaOggetto(s);
+    String usaOggetto(){
+        Personaggio p = personaggi.get(0);
+        
+        if(p.sizeInventario() > 0){
+            int n = im.generaNumero(0, p.sizeInventario());
+            String nome = p.nomeOggetto(n);
+            p.usaOggetto(nome);
+            return "Hai usato: " + nome;
         }
+        
+        return "Inventario vuoto";
     }
     
     void checkEnergia(){
