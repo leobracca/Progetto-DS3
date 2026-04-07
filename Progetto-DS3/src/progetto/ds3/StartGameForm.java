@@ -71,6 +71,9 @@ public class StartGameForm extends javax.swing.JFrame {
         btn_oggetto = new javax.swing.JButton();
         txt_storia1 = new javax.swing.JScrollPane();
         txt_storia = new javax.swing.JTextArea();
+        btn_salta = new javax.swing.JButton();
+        btn_csv = new javax.swing.JButton();
+        btn_ser = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -89,7 +92,7 @@ public class StartGameForm extends javax.swing.JFrame {
         txt_status.setFocusable(false);
         txt_status1.setViewportView(txt_status);
 
-        getContentPane().add(txt_status1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
+        getContentPane().add(txt_status1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
 
         btn_round.setText("Round successivo");
         btn_round.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +111,7 @@ public class StartGameForm extends javax.swing.JFrame {
                 btn_attaccaActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_attacca, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, -1, -1));
+        getContentPane().add(btn_attacca, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         btn_abilita.setText("Abilita");
         btn_abilita.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +119,7 @@ public class StartGameForm extends javax.swing.JFrame {
                 btn_abilitaActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_abilita, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, -1, -1));
+        getContentPane().add(btn_abilita, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, -1, -1));
 
         btn_oggetto.setText("oggetto");
         btn_oggetto.addActionListener(new java.awt.event.ActionListener() {
@@ -131,6 +134,30 @@ public class StartGameForm extends javax.swing.JFrame {
         txt_storia1.setViewportView(txt_storia);
 
         getContentPane().add(txt_storia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 240, 180));
+
+        btn_salta.setText("Salva");
+        btn_salta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_saltaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_salta, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, -1, -1));
+
+        btn_csv.setText("CSV");
+        btn_csv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_csvActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_csv, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, -1, -1));
+
+        btn_ser.setText("SER");
+        btn_ser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_serActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_ser, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 320, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -258,6 +285,50 @@ public class StartGameForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_oggettoActionPerformed
 
+    private void btn_saltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saltaActionPerformed
+        Personaggio p = g.getPersonaggio().get(0);
+        Salvataggio.salvaSer(p);
+        Salvataggio.salvaCSV(p, g.getRound());
+    }//GEN-LAST:event_btn_saltaActionPerformed
+
+    private void btn_csvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_csvActionPerformed
+        Personaggio p = Salvataggio.caricaCSV();
+        
+        if(p != null){
+            g.getPersonaggio().clear();
+            g.getPersonaggio().add(p);
+            g.setRound(p.getRound());
+            
+            String statistiche = "NOME: " + p.getNome() + "\n"
+                               + "VITA: " + p.getVita() + "\n"
+                               + "DANNI: " + p.getDanni() + "\n"
+                               + "ENERGIA: " + p.getEnergia() + "\n"
+                               + "PUNTI: " + p.getPunti();
+            txt_status.setText(statistiche);
+            
+            lbl_round.setText("Round: " + g.getRound());
+        }
+    }//GEN-LAST:event_btn_csvActionPerformed
+
+    private void btn_serActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_serActionPerformed
+        Personaggio p = Salvataggio.caricaSer();
+        
+        if(p != null){
+            g.getPersonaggio().clear();
+            g.getPersonaggio().add(p);
+            g.setRound(p.getRound());
+            
+            String statistiche = "NOME: " + p.getNome() + "\n"
+                               + "VITA: " + p.getVita() + "\n"
+                               + "DANNI: " + p.getDanni() + "\n"
+                               + "ENERGIA: " + p.getEnergia() + "\n"
+                               + "PUNTI: " + p.getPunti();
+            txt_status.setText(statistiche);
+            
+            lbl_round.setText("Round: " + g.getRound());
+        }
+    }//GEN-LAST:event_btn_serActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -265,9 +336,12 @@ public class StartGameForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_abilita;
     private javax.swing.JButton btn_attacca;
+    private javax.swing.JButton btn_csv;
     private javax.swing.JButton btn_inizio;
     private javax.swing.JButton btn_oggetto;
     private javax.swing.JButton btn_round;
+    private javax.swing.JButton btn_salta;
+    private javax.swing.JButton btn_ser;
     private javax.swing.JLabel lbl_round;
     private javax.swing.JTextArea txt_status;
     private javax.swing.JScrollPane txt_status1;

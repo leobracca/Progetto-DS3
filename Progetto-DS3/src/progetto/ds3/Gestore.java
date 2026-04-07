@@ -47,7 +47,8 @@ public class Gestore implements Serializable{
     }
     
     String iniziaGioco(){
-        round++;
+        personaggi.get(0).incrementaRound();
+        round = personaggi.get(0).getRound();
         if(round > 10){
             return "VITTORIA";
         }
@@ -89,7 +90,7 @@ public class Gestore implements Serializable{
         }
 
         else{
-            p.setVita(bossAttuale.getDanni());               
+            p.setVita(-bossAttuale.getDanni());               
             stringa += bossAttuale.getNome() + " ti colpisce per " + bossAttuale.getDanni() + " danni \n";
         
             if(p.getVita() <= 0){
@@ -212,5 +213,9 @@ public class Gestore implements Serializable{
         }
         
         return String.valueOf(bossAttuale.getNome());
+    }
+
+    void setRound(int round) {
+        this.round = round;
     }
 }

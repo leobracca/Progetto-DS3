@@ -16,6 +16,7 @@ public class Personaggio implements Serializable{
     private int energia;
     private int danni;
     private boolean abilita = true;
+    private int round = 0;
     private ArrayList<Inventario>inventario = new ArrayList<>();
 
     public Personaggio(String nome, String vita, String energia, String danni) {
@@ -23,6 +24,24 @@ public class Personaggio implements Serializable{
         this.vita = Integer.parseInt(vita);
         this.energia = Integer.parseInt(energia);
         this.danni = Integer.parseInt(danni);
+    }
+
+    public Personaggio(String nome, String vita, String danno, String energia, String round, String punti, boolean abilita) {
+        this.nome = nome;
+        this.vita = Integer.parseInt(vita);
+        this.danni = Integer.parseInt(danno);
+        this.energia = Integer.parseInt(energia);
+        this.round = Integer.parseInt(round);
+        this.punteggio = Integer.parseInt(punti);
+        this.abilita = abilita;
+    }
+    
+    void incrementaRound(){
+        round++;
+    }
+    
+    int getRound(){
+        return round;
     }
     
     String getNome(){
