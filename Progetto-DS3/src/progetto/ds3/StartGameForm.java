@@ -4,20 +4,26 @@
  */
 package progetto.ds3;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author lbrac
  */
 public class StartGameForm extends javax.swing.JFrame {
     Gestore g;
+    String nome;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(StartGameForm.class.getName());
 
     /**
      * Creates new form StartGameForm
      * @param gestore
+     * @param nome
      */
-    public StartGameForm(Gestore gestore) {
+    public StartGameForm(Gestore gestore, String nome) {
         initComponents();
+ 
         this.setSize(650, 400);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -38,11 +44,15 @@ public class StartGameForm extends javax.swing.JFrame {
         txt_status.setFont(dsFont);
         
         this.g = gestore;  
+        this.nome = nome;
         
         btn_round.setVisible(false);
         btn_attacca.setVisible(false);
         btn_abilita.setVisible(false);
         btn_oggetto.setVisible(false);
+        btn_salta.setVisible(false);
+        btn_ser.setVisible(false);
+        btn_csv.setVisible(false);
         
         lbl_round.setVisible(false);
         
@@ -74,6 +84,7 @@ public class StartGameForm extends javax.swing.JFrame {
         btn_salta = new javax.swing.JButton();
         btn_csv = new javax.swing.JButton();
         btn_ser = new javax.swing.JButton();
+        lbl_foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -158,6 +169,7 @@ public class StartGameForm extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_ser, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 320, -1, -1));
+        getContentPane().add(lbl_foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 100, 120));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -184,6 +196,12 @@ public class StartGameForm extends javax.swing.JFrame {
         txt_status.setVisible(true);
         txt_status.setText(statistiche);
         btn_inizio.setVisible(false);
+        
+        btn_salta.setVisible(true);
+        btn_ser.setVisible(true);
+        btn_csv.setVisible(true);
+        
+        immagine(lbl_foto, nome);
     }//GEN-LAST:event_btn_inizioActionPerformed
 
     private void btn_abilitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_abilitaActionPerformed
@@ -210,6 +228,8 @@ public class StartGameForm extends javax.swing.JFrame {
         lbl_round.setText("Round: " + g.getRound());
         
         if(evento.equals("VITTORIA")){
+            Vittoria v = new Vittoria();
+            v.setVisible (true);
             this.dispose();
         }
         
@@ -223,7 +243,10 @@ public class StartGameForm extends javax.swing.JFrame {
             txt_status.setText(statistiche);
             
             if(p.getVita() <= 0){
+                Esito e = new Esito();
+                e.setVisible(true);
                 this.dispose();
+                return;
             }
             
             if(evento.equals("Boss")){
@@ -265,6 +288,8 @@ public class StartGameForm extends javax.swing.JFrame {
             }
             
                 if (p.getVita() <= 0) {
+                Esito e = new Esito();
+                e.setVisible(true);
                 this.dispose();
             }
         }
@@ -342,10 +367,30 @@ public class StartGameForm extends javax.swing.JFrame {
     private javax.swing.JButton btn_round;
     private javax.swing.JButton btn_salta;
     private javax.swing.JButton btn_ser;
+    private javax.swing.JLabel lbl_foto;
     private javax.swing.JLabel lbl_round;
     private javax.swing.JTextArea txt_status;
     private javax.swing.JScrollPane txt_status1;
     private javax.swing.JTextArea txt_storia;
     private javax.swing.JScrollPane txt_storia1;
     // End of variables declaration//GEN-END:variables
+
+    public void immagine(javax.swing.JLabel label, String nomeFile){
+        try {
+            String percorso = "Documenti/Immagini/" + nomeFile;
+
+            ImageIcon iconaOriginale = new ImageIcon(percorso);
+            Image img = iconaOriginale.getImage();
+
+            Image nuovaImg = img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+
+
+            label.setIcon(new ImageIcon(nuovaImg));
+        
+        } 
+        
+        catch (Exception e) {
+            System.out.println("Errore nel caricamento dell'immagine: " + e.getMessage());
+        }
+    }
 }

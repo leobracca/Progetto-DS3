@@ -61,7 +61,7 @@ public class Gestore implements Serializable{
     
     String generaEvento(){
         n = im.generaNumero(0, 101);
-        if(n <= 25){
+        if(n <= 35){
             n = im.generaNumero(0, boss.size());
             this.bossAttuale = boss.get(n);
             return "Boss";   
@@ -78,7 +78,7 @@ public class Gestore implements Serializable{
         Personaggio p = personaggi.get(0);
         String stringa = "";
         
-        puntiEnergia(-2, +3);
+        puntiEnergia(+2, -3);
         
         bossAttuale.setVita(p.getDanni());
         stringa += "Attacchi il boss " + bossAttuale.getNome() + " per " + p.getDanni() + " danni \n";
@@ -161,6 +161,7 @@ public class Gestore implements Serializable{
     void checkEnergia(){
         if(personaggi.get(0).getEnergia() <= 0){
             c++;
+            personaggi.get(0).setVita(-10000);
             checkSconfitto();
         }
         
@@ -185,7 +186,9 @@ public class Gestore implements Serializable{
     }
     
     void puntiEnergia(int i, int j){
-        personaggi.get(0).setPuntiEnergia(i, j);
+        if(personaggi != null && !personaggi.isEmpty()){
+            personaggi.get(0).setPuntiEnergia(i, j);
+        }
     }
     
     void stampaInventario(){

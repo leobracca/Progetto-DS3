@@ -33,6 +33,16 @@ public class PlayForm extends javax.swing.JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         
+        this.getContentPane().setBackground(new java.awt.Color(15, 15, 15));
+        
+        java.awt.Color dsSfondo = new java.awt.Color(25, 25, 25);
+        java.awt.Color dsTesto = new java.awt.Color(180, 180, 160);
+        
+        jTextArea1.setBackground(dsSfondo);
+        jTextArea1.setForeground(dsTesto);
+        jTextArea1.setBorder(javax.swing.BorderFactory.createLineBorder(dsTesto, 1));
+        txt_info.setBorder(null);
+        
         g = new Gestore();
         
         txt_info.setVisible(false);
@@ -50,15 +60,18 @@ public class PlayForm extends javax.swing.JFrame {
         btn_cavaliere = new javax.swing.JButton();
         btn_mago = new javax.swing.JButton();
         btn_vichingo = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         btn_info = new javax.swing.JButton();
         txt_info = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         lbl_cavaliere = new javax.swing.JLabel();
         lbl_mago = new javax.swing.JLabel();
         lbl_vichingo = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea4 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -78,7 +91,7 @@ public class PlayForm extends javax.swing.JFrame {
                 btn_magoActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_mago, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, -1, -1));
+        getContentPane().add(btn_mago, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 80, -1));
 
         btn_vichingo.setText("Vichingo");
         btn_vichingo.addActionListener(new java.awt.event.ActionListener() {
@@ -87,15 +100,6 @@ public class PlayForm extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_vichingo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, -1, -1));
-
-        jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
-
-        jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, -1, -1));
-
-        jLabel3.setText("jLabel3");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, -1, -1));
 
         btn_info.setText("Informazioni");
         btn_info.addActionListener(new java.awt.event.ActionListener() {
@@ -107,12 +111,35 @@ public class PlayForm extends javax.swing.JFrame {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+        jTextArea1.setText("Benvenuto nel gioco di Dark Souls 3\nQuesta è una piccola guida per la soppravivenza:\n\nAd ogni round si genera un evento casuale\nPuoi trovare un oggetto che finisce nel tuo inventario\nPuoi perdere un oggetto dal tuo inventario\nSe perdi un oggetto ma l'inventario è vuoto perdi punti vita\nPuò apparire un boss da sconfiggere in combattimento\nSe la vita è uguale o minore di 0 la partita finisce\nSe l'energia rimane negativa per troppo tempo la partita finisce\nSi può usare una sola volta per partita l'abilità per saltare un combattimento\nSi può salvare lo stato della partita per riprenderla in seguito");
         txt_info.setViewportView(jTextArea1);
 
         getContentPane().add(txt_info, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 460, 220));
         getContentPane().add(lbl_cavaliere, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 80, 130));
         getContentPane().add(lbl_mago, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 70, 130));
         getContentPane().add(lbl_vichingo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 70, 130));
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(3);
+        jTextArea2.setTabSize(1);
+        jTextArea2.setText("Vita 100\nEnergia 5\nDanni 20");
+        jScrollPane1.setViewportView(jTextArea2);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 80, 70));
+
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(3);
+        jTextArea3.setText("Vita 80\nEnergia 7\nDanni 15");
+        jScrollPane2.setViewportView(jTextArea3);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 80, 70));
+
+        jTextArea4.setColumns(20);
+        jTextArea4.setRows(3);
+        jTextArea4.setText("Vita 90\nEnergia 6\nDanni 25");
+        jScrollPane3.setViewportView(jTextArea4);
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, 80, 70));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -130,7 +157,7 @@ public class PlayForm extends javax.swing.JFrame {
     private void btn_cavaliereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cavaliereActionPerformed
         g.init();
         g.addPersonaggio("Cavaliere");
-        gf = new StartGameForm(g);
+        gf = new StartGameForm(g, "Cavaliere.png");
         gf.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_cavaliereActionPerformed
@@ -138,7 +165,7 @@ public class PlayForm extends javax.swing.JFrame {
     private void btn_magoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_magoActionPerformed
         g.init();
         g.addPersonaggio("Mago");
-        gf = new StartGameForm(g);
+        gf = new StartGameForm(g, "Mago.png");
         gf.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_magoActionPerformed
@@ -146,7 +173,7 @@ public class PlayForm extends javax.swing.JFrame {
     private void btn_vichingoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_vichingoActionPerformed
         g.init();
         g.addPersonaggio("Vichingo");
-        gf = new StartGameForm(g);
+        gf = new StartGameForm(g, "Vichingo.png");
         gf.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_vichingoActionPerformed
@@ -181,10 +208,13 @@ public class PlayForm extends javax.swing.JFrame {
     private javax.swing.JButton btn_info;
     private javax.swing.JButton btn_mago;
     private javax.swing.JButton btn_vichingo;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTextArea jTextArea4;
     private javax.swing.JLabel lbl_cavaliere;
     private javax.swing.JLabel lbl_mago;
     private javax.swing.JLabel lbl_vichingo;
