@@ -4,6 +4,9 @@
  */
 package progetto.ds3;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author lbrac
@@ -18,6 +21,10 @@ public class PlayForm extends javax.swing.JFrame {
      */
     public PlayForm() {
         initComponents();
+        
+        immagine(lbl_cavaliere, "Cavaliere.png");
+        immagine(lbl_mago, "Mago.png");
+        immagine(lbl_vichingo, "Vichingo.png");
         
         Musica.riproduci("musica.wav");
         
@@ -49,6 +56,9 @@ public class PlayForm extends javax.swing.JFrame {
         btn_info = new javax.swing.JButton();
         txt_info = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        lbl_cavaliere = new javax.swing.JLabel();
+        lbl_mago = new javax.swing.JLabel();
+        lbl_vichingo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -99,7 +109,10 @@ public class PlayForm extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         txt_info.setViewportView(jTextArea1);
 
-        getContentPane().add(txt_info, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 460, 220));
+        getContentPane().add(txt_info, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 460, 220));
+        getContentPane().add(lbl_cavaliere, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 80, 130));
+        getContentPane().add(lbl_mago, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 70, 130));
+        getContentPane().add(lbl_vichingo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 70, 130));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -172,6 +185,30 @@ public class PlayForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lbl_cavaliere;
+    private javax.swing.JLabel lbl_mago;
+    private javax.swing.JLabel lbl_vichingo;
     private javax.swing.JScrollPane txt_info;
     // End of variables declaration//GEN-END:variables
+
+    public void immagine(javax.swing.JLabel label, String nomeFile){
+        try {
+
+        String percorso = "Documenti/Immagini/" + nomeFile;
+        
+
+        ImageIcon iconaOriginale = new ImageIcon(percorso);
+        Image img = iconaOriginale.getImage();
+
+        Image nuovaImg = img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+        
+
+        label.setIcon(new ImageIcon(nuovaImg));
+        
+        } 
+        
+        catch (Exception e) {
+            System.out.println("Errore nel caricamento dell'immagine: " + e.getMessage());
+        }
+    }
 }
