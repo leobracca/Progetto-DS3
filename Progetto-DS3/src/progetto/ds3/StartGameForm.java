@@ -225,16 +225,23 @@ public class StartGameForm extends javax.swing.JFrame {
 
     private void btn_roundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_roundActionPerformed
         String evento = g.iniziaGioco();
+        Personaggio p = g.getPersonaggio().get(0);
         lbl_round.setText("Round: " + g.getRound());
         
         if(evento.equals("VITTORIA")){
+            String messaggio = "Risulatato partita: \n\n"
+                    +"🏆Punteggio: " + p.getPunti() +"\n"
+                    + "❤️ Vita rimasta: " + p.getVita() + "\n"
+                     + "⚔️ Danni: " + p.getDanni() + "\n"
+                     + "⚡ Energia: " + p.getEnergia();
+            javax.swing.JOptionPane.showMessageDialog(this, messaggio, "Risultato Partita", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    
             Vittoria v = new Vittoria();
             v.setVisible (true);
             this.dispose();
         }
         
         else{
-            Personaggio p = g.getPersonaggio().get(0);
             String statistiche = "NOME: " + p.getNome() + "\n"
                        + "VITA: " + p.getVita() + "\n"
                        + "DANNI: " + p.getDanni() + "\n"
@@ -243,6 +250,13 @@ public class StartGameForm extends javax.swing.JFrame {
             txt_status.setText(statistiche);
             
             if(p.getVita() <= 0){
+                String messaggio = "Risulatato partita: \n\n"
+                    +"🏆Punteggio: " + p.getPunti() +"\n"
+                    + "❤️ Vita rimasta: " + p.getVita() + "\n"
+                     + "⚔️ Danni: " + p.getDanni() + "\n"
+                     + "⚡ Energia: " + p.getEnergia();
+                javax.swing.JOptionPane.showMessageDialog(this, messaggio, "Risultato Partita", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            
                 Esito e = new Esito();
                 e.setVisible(true);
                 this.dispose();
@@ -288,6 +302,13 @@ public class StartGameForm extends javax.swing.JFrame {
             }
             
                 if (p.getVita() <= 0) {
+                    String messaggio = "Risulatato partita: \n\n"
+                        +"🏆Punteggio: " + p.getPunti() +"\n"
+                        + "❤️ Vita rimasta: " + p.getVita() + "\n"
+                        + "⚔️ Danni: " + p.getDanni() + "\n"
+                        + "⚡ Energia: " + p.getEnergia();
+                    javax.swing.JOptionPane.showMessageDialog(this, messaggio, "Risultato Partita", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            
                 Esito e = new Esito();
                 e.setVisible(true);
                 this.dispose();

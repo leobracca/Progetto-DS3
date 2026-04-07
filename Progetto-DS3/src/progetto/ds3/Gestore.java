@@ -47,6 +47,10 @@ public class Gestore implements Serializable{
     }
     
     String iniziaGioco(){
+        if(personaggi.isEmpty()){
+            return "MORTO";
+        }
+        
         personaggi.get(0).incrementaRound();
         round = personaggi.get(0).getRound();
         if(round > 10){
