@@ -19,6 +19,8 @@ public class PlayForm extends javax.swing.JFrame {
     public PlayForm() {
         initComponents();
         
+        Musica.riproduci("musica.wav");
+        
         //Finestra grandezza fissa e non modificabile visibile al centro dello schermo
         this.setSize(610, 375);
         this.setResizable(false);
