@@ -225,10 +225,10 @@ public class StartGameForm extends javax.swing.JFrame {
 
     private void btn_roundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_roundActionPerformed
         String evento = g.iniziaGioco();
-        Personaggio p = g.getPersonaggio().get(0);
         lbl_round.setText("Round: " + g.getRound());
         
         if(evento.equals("VITTORIA")){
+            Personaggio p = g.getPersonaggio().get(0);
             String messaggio = "Risulatato partita: \n\n"
                     +"🏆Punteggio: " + p.getPunti() +"\n"
                     + "❤️ Vita rimasta: " + p.getVita() + "\n"
@@ -242,6 +242,7 @@ public class StartGameForm extends javax.swing.JFrame {
         }
         
         else{
+            Personaggio p = g.getPersonaggio().get(0);
             String statistiche = "NOME: " + p.getNome() + "\n"
                        + "VITA: " + p.getVita() + "\n"
                        + "DANNI: " + p.getDanni() + "\n"
@@ -249,7 +250,7 @@ public class StartGameForm extends javax.swing.JFrame {
                        + "PUNTI: " + p.getPunti();
             txt_status.setText(statistiche);
             
-            if(p.getVita() <= 0){
+            if(p.getVita() <= 0){    
                 String messaggio = "Risulatato partita: \n\n"
                     +"🏆Punteggio: " + p.getPunti() +"\n"
                     + "❤️ Vita rimasta: " + p.getVita() + "\n"
