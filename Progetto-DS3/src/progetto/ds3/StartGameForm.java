@@ -15,6 +15,7 @@ public class StartGameForm extends javax.swing.JFrame {
     Gestore g;
     String nome;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(StartGameForm.class.getName());
+    private String statistiche;
 
     /**
      * Creates new form StartGameForm
@@ -177,11 +178,7 @@ public class StartGameForm extends javax.swing.JFrame {
     private void btn_inizioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inizioActionPerformed
         Personaggio p = g.getPersonaggio().get(0);
         
-        String statistiche ="NOME: " + p.getNome() + "\n"
-                       + "VITA: " + p.getVita() + "\n"
-                       + "DANNI: " + p.getDanni() + "\n"
-                       + "ENERGIA: " + p.getEnergia() + "\n"
-                       + "PUNTI: " + p.getPunti();
+        
         
         btn_round.setVisible(true);
         btn_attacca.setVisible(true);
@@ -210,12 +207,8 @@ public class StartGameForm extends javax.swing.JFrame {
         
         if (risultato.equals("Abilita usata, salti il combattimento")) {
             Personaggio p = g.getPersonaggio().get(0);
-            String statistiche = "NOME: " + p.getNome() + "\n"
-                               + "VITA: " + p.getVita() + "\n"
-                               + "DANNI: " + p.getDanni() + "\n"
-                               + "ENERGIA: " + p.getEnergia() + "\n"
-                               + "PUNTI: " + p.getPunti();
-            txt_status.setText(statistiche);
+            String stats = stats(p);
+            txt_status.setText(stats);
             
             btn_round.setEnabled(true);
             btn_attacca.setEnabled(false);
@@ -229,11 +222,7 @@ public class StartGameForm extends javax.swing.JFrame {
         
         if(evento.equals("VITTORIA")){
             Personaggio p = g.getPersonaggio().get(0);
-            String messaggio = "Risulatato partita: \n\n"
-                    +"🏆Punteggio: " + p.getPunti() +"\n"
-                    + "❤️ Vita rimasta: " + p.getVita() + "\n"
-                     + "⚔️ Danni: " + p.getDanni() + "\n"
-                     + "⚡ Energia: " + p.getEnergia();
+            String messaggio = esito(p);
             javax.swing.JOptionPane.showMessageDialog(this, messaggio, "Risultato Partita", javax.swing.JOptionPane.INFORMATION_MESSAGE);
                     
             Vittoria v = new Vittoria();
@@ -243,19 +232,11 @@ public class StartGameForm extends javax.swing.JFrame {
         
         else{
             Personaggio p = g.getPersonaggio().get(0);
-            String statistiche = "NOME: " + p.getNome() + "\n"
-                       + "VITA: " + p.getVita() + "\n"
-                       + "DANNI: " + p.getDanni() + "\n"
-                       + "ENERGIA: " + p.getEnergia() + "\n"
-                       + "PUNTI: " + p.getPunti();
-            txt_status.setText(statistiche);
+            String stats = stats(p);
+            txt_status.setText(stats);
             
             if(p.getVita() <= 0){    
-                String messaggio = "Risulatato partita: \n\n"
-                    +"🏆Punteggio: " + p.getPunti() +"\n"
-                    + "❤️ Vita rimasta: " + p.getVita() + "\n"
-                     + "⚔️ Danni: " + p.getDanni() + "\n"
-                     + "⚡ Energia: " + p.getEnergia();
+                String messaggio = esito(p);
                 javax.swing.JOptionPane.showMessageDialog(this, messaggio, "Risultato Partita", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             
                 Esito e = new Esito();
@@ -288,12 +269,8 @@ public class StartGameForm extends javax.swing.JFrame {
         
         if (!g.getPersonaggio().isEmpty()) {
             Personaggio p = g.getPersonaggio().get(0);
-            String statistiche = "NOME: " + p.getNome() + "\n"
-                               + "VITA: " + p.getVita() + "\n"
-                               + "DANNI: " + p.getDanni() + "\n"
-                               + "ENERGIA: " + p.getEnergia() + "\n"
-                               + "PUNTI: " + p.getPunti();
-            txt_status.setText(statistiche);
+            String stats = stats(p);
+            txt_status.setText(stats);
         
             if (g.getNomeBoss().equals("No boss")) {
                 btn_attacca.setEnabled(false);
@@ -303,11 +280,7 @@ public class StartGameForm extends javax.swing.JFrame {
             }
             
                 if (p.getVita() <= 0) {
-                    String messaggio = "Risulatato partita: \n\n"
-                        +"🏆Punteggio: " + p.getPunti() +"\n"
-                        + "❤️ Vita rimasta: " + p.getVita() + "\n"
-                        + "⚔️ Danni: " + p.getDanni() + "\n"
-                        + "⚡ Energia: " + p.getEnergia();
+                    String messaggio = esito(p);
                     javax.swing.JOptionPane.showMessageDialog(this, messaggio, "Risultato Partita", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             
                 Esito e = new Esito();
@@ -323,12 +296,8 @@ public class StartGameForm extends javax.swing.JFrame {
         
         if (!g.getPersonaggio().isEmpty()) {
             Personaggio p = g.getPersonaggio().get(0);
-            String statistiche = "NOME: " + p.getNome() + "\n"
-                               + "VITA: " + p.getVita() + "\n"
-                               + "DANNI: " + p.getDanni() + "\n"
-                               + "ENERGIA: " + p.getEnergia() + "\n"
-                               + "PUNTI: " + p.getPunti();
-            txt_status.setText(statistiche);
+            String stats = stats(p);
+            txt_status.setText(stats);
         }
     }//GEN-LAST:event_btn_oggettoActionPerformed
 
@@ -346,12 +315,8 @@ public class StartGameForm extends javax.swing.JFrame {
             g.getPersonaggio().add(p);
             g.setRound(p.getRound());
             
-            String statistiche = "NOME: " + p.getNome() + "\n"
-                               + "VITA: " + p.getVita() + "\n"
-                               + "DANNI: " + p.getDanni() + "\n"
-                               + "ENERGIA: " + p.getEnergia() + "\n"
-                               + "PUNTI: " + p.getPunti();
-            txt_status.setText(statistiche);
+            String stats = stats(p);
+            txt_status.setText(stats);
             
             lbl_round.setText("Round: " + g.getRound());
         }
@@ -365,12 +330,8 @@ public class StartGameForm extends javax.swing.JFrame {
             g.getPersonaggio().add(p);
             g.setRound(p.getRound());
             
-            String statistiche = "NOME: " + p.getNome() + "\n"
-                               + "VITA: " + p.getVita() + "\n"
-                               + "DANNI: " + p.getDanni() + "\n"
-                               + "ENERGIA: " + p.getEnergia() + "\n"
-                               + "PUNTI: " + p.getPunti();
-            txt_status.setText(statistiche);
+            String stats = stats(p);
+            txt_status.setText(stats);
             
             lbl_round.setText("Round: " + g.getRound());
         }
@@ -414,5 +375,23 @@ public class StartGameForm extends javax.swing.JFrame {
         catch (Exception e) {
             System.out.println("Errore nel caricamento dell'immagine: " + e.getMessage());
         }
+    }
+    
+    public String esito(Personaggio p){
+        String statistiche = "Risulatato partita: \n\n"
+                    +"🏆Punteggio: " + p.getPunti() +"\n"
+                    + "❤️ Vita rimasta: " + p.getVita() + "\n"
+                     + "⚔️ Danni: " + p.getDanni() + "\n"
+                     + "⚡ Energia: " + p.getEnergia();
+        return statistiche;
+    }
+    
+    public String stats(Personaggio p){
+        String statistiche ="NOME: " + p.getNome() + "\n"
+                       + "VITA: " + p.getVita() + "\n"
+                       + "DANNI: " + p.getDanni() + "\n"
+                       + "ENERGIA: " + p.getEnergia() + "\n"
+                       + "PUNTI: " + p.getPunti();
+        return statistiche;
     }
 }
